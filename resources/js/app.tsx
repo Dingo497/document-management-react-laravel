@@ -1,5 +1,5 @@
 import './bootstrap';
-import '../css/app.css'
+import '../css/app.scss'
 
 import ReactDOM from 'react-dom/client';
 import Home from './pages/Home';
