@@ -1,7 +1,7 @@
 import '../../css/pages/RegisterLogin.scss';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { loginAction } from "../redux/actions/authActions";
 import { AuthLoginForm } from "../types/auth/authTypes";
 
@@ -44,7 +44,7 @@ export default function Login() {
                     />
                     <button type='submit' className='btn'>Login</button>
                     <p className='message'>
-                        <a href='#'>Create an account</a>
+                        <Link to="/register">Create an account</Link>
                     </p>
                 </form>
             </div>

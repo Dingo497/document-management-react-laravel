@@ -2,7 +2,7 @@ import '../../css/pages/RegisterLogin.scss';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerAction } from "../redux/actions/authActions";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { AuthRegisterForm } from "../types/auth/authTypes";
 
 export default function Register() {
@@ -55,7 +55,7 @@ export default function Register() {
                     />
                     <button type='submit' className='btn'>Submit</button>
                     <p className='message'>
-                        <a href='#'>Sign in</a>
+                        <Link to="/login">Sign in</Link>
                     </p>
                 </form>
             </div>
