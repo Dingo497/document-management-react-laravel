@@ -3,7 +3,7 @@ import { backendAPI } from './index';
 import {
     ApiAuthSuccessResponse,
     ApiGetUserResponse,
-    ApiStatusResponse,
+    ApiStatusResponse, ApiToken,
     AuthLoginForm,
     AuthRegisterForm
 } from "../types/auth/authTypes";
@@ -12,7 +12,7 @@ export const register = (user: AuthRegisterForm): Promise<AxiosResponse<ApiAuthS
 
 export const login = (user: AuthLoginForm): Promise<AxiosResponse<ApiAuthSuccessResponse>> => backendAPI.post('login', user);
 
-export const logout = (token: string): Promise<AxiosResponse<ApiStatusResponse>> => backendAPI.post('logout', {}, {
+export const logout = (token: ApiToken): Promise<AxiosResponse<ApiStatusResponse>> => backendAPI.post('logout', {}, {
     headers: {
         Authorization: `Bearer ${token}`,
     },

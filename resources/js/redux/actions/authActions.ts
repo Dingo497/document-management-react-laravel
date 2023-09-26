@@ -1,6 +1,6 @@
 import { ActionTypes } from "../constants/actionTypes";
-import { login, register } from "../../http/authApi";
-import { AuthLoginForm, AuthRegisterForm } from "../../types/auth/authTypes";
+import { login, logout, register } from "../../http/authApi";
+import { ApiToken, AuthLoginForm, AuthRegisterForm } from "../../types/auth/authTypes";
 
 export const registerAction = (userData: AuthRegisterForm) => {
     return async (dispatch) => {
@@ -32,6 +32,18 @@ export const loginAction = (userData: AuthLoginForm) => {
     }
 }
 
+export const logoutAction = (token: ApiToken) => {
+    return async (dispatch) => {
+        try {
+            await logout(token);
+            return dispatch(removeUserAction());
+        } catch (error) {
+            // TODO: spravit nejake zobrazovanie chyb
+            return console.log(error.response.data);
+        }
+    }
+}
+
 export const setUserAction = (userData: any) => {
     return {
         type: ActionTypes.SET_USER,
@@ -39,3 +51,10 @@ export const setUserAction = (userData: any) => {
         token: userData.token,
     };
 };
+
+
+export const removeUserAction = () => {
+    return {
+        type: ActionTypes.LOGOUT,
+    };
+}

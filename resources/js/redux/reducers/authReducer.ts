@@ -9,13 +9,11 @@ const authReducer = (state = initialState, action: any) => {
                 user: action.user,
                 token: action.token,
             };
-        // docasne
-        // case ActionTypes.LOGOUT:
-        //     return {
-        //         ...state,
-        //         user: null,
-        //         token: null,
-        //     };
+        case ActionTypes.LOGOUT:
+            return {
+                user: null,
+                token: null,
+            };
         default:
             return state;
     }

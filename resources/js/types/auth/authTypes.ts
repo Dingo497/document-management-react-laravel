@@ -32,10 +32,10 @@ export type ApiStatusResponse = {
     status: 'success' | 'error';
     message?: string;
 }
-export type ApiTokenResponse = {
+export type ApiToken = {
     token: string;
 }
-export type ApiAuthSuccessResponse = ApiStatusResponse & ApiTokenResponse & {
+export type ApiAuthSuccessResponse = ApiStatusResponse & ApiToken & {
     data: {
         user: User,
     }
