@@ -19,6 +19,14 @@ export type AuthRegisterForm = AuthLoginForm & {
 }
 
 
+// TS mi nejde teda... Opakujem token: string...
+// Sluzi na typovanie redux action setUserAction
+export type setUserActionType = {
+    user: User;
+    token: string;
+}
+
+
 // Sluzi na identifikovanie viac formularovych chyb
 export type ApiAuthErrorFields = {
     [key: string]: string[];

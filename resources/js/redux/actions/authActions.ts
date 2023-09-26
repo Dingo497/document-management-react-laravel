@@ -1,6 +1,6 @@
 import { ActionTypes } from "../constants/actionTypes";
 import { login, logout, register } from "../../http/authApi";
-import { ApiToken, AuthLoginForm, AuthRegisterForm } from "../../types/auth/authTypes";
+import { ApiToken, AuthLoginForm, AuthRegisterForm, setUserActionType } from "../../types/auth/authTypes";
 
 export const registerAction = (userData: AuthRegisterForm) => {
     return async (dispatch) => {
@@ -44,7 +44,7 @@ export const logoutAction = (token: ApiToken) => {
     }
 }
 
-export const setUserAction = (userData: any) => {
+export const setUserAction = (userData: setUserActionType) => {
     return {
         type: ActionTypes.SET_USER,
         user: userData.user,
