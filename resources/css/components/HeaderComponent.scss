@@ -1,0 +1,41 @@
+@import '../variables';
+@import '../mixins';
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: right;
+
+    a {
+        display: block;
+        color: #111;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 28px;
+        transition: 0.4s;
+        border-bottom-left-radius: 15px;
+
+        &:hover {
+            background-color: $main-primary-color;
+            color: $main-element-bg-color;
+            cursor: pointer;
+        }
+    }
+
+    span {
+        display: block;
+        color: #111;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 28px;
+    }
+}
+
+
