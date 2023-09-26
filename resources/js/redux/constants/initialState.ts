@@ -1,7 +1,6 @@
-import {AppStateTypes} from "./appStateTypes";
+import { InitialStateAuthType } from "./appStateTypes";
 
-export const initialState: AppStateTypes = {
-    auth: {
-        user: ''
-    }
+export const initialState: InitialStateAuthType = {
+    user: null,
+    token: null,
 };

@@ -36,7 +36,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'error',
                 'errors' => ['error' => ['The provided credentials are not correct']]
-            ]);
+            ], 422);
         }
 
         $user = Auth::user();

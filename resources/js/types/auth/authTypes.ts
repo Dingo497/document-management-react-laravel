@@ -8,11 +8,12 @@ export type User = {
 
 // Sluzi na spracovanie formulara
 export type AuthLoginForm = {
-    name: string;
     email: string;
+    password: string;
 }
 // Sluzi na spracovanie register formulara
 export type AuthRegisterForm = AuthLoginForm & {
+    name: string;
     password: string;
     password_confirmation: string;
 }
@@ -45,5 +46,6 @@ export type ApiGetUserResponse = ApiStatusResponse & {
     }
 }
 // Jednotny response typ pre auth operacie
-export type ApiAuthResponse = ApiAuthSuccessResponse | ApiAuthErrorsResponse;
+// TODO: tento mi je asi nanic kedze union typy mi akosi IDE nechape...
+// export type ApiAuthResponse = ApiAuthSuccessResponse | ApiAuthErrorsResponse;
 
