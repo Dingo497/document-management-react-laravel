@@ -1,0 +1,41 @@
+@import '../variables';
+@import '../mixins';
+
+.form {
+    position: relative;
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 45px;
+}
+
+.auth-title {
+    text-align: center;
+    color: $main-primary-color;
+    text-shadow: 2px 2px darken($main-primary-color, 20%);
+}
+
+.form {
+    input {
+        @include input;
+        ::placeholder {
+            color: $bg-input-color;
+        }
+    }
+
+    .btn {
+        @include btn;
+    }
+
+    .message {
+        color: $bg-input-color;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+
+        a {
+            @include main-link($bg-color: $main-primary-color);
+        }
+    }
+}
+
+

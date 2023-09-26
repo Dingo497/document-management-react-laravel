@@ -1,5 +1,15 @@
-$base-color: #c6538c;
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import './variables';
 
-button {
-    background-color: $base-color;
+body {
+    font-family: $font-family;
+    background: $main-bg-color;
+}
+
+.container {
+    width: 365px;
+    margin: 5% auto;
+    background-color: $main-element-bg-color;
+    border-radius: 15px;
+    box-shadow: 5px 5px darken($main-element-bg-color, 25%);;
 }

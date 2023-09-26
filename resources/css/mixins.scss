@@ -1,0 +1,58 @@
+@import './variables';
+$default-mixins-color: #f5f5f5;
+
+// MAIN BUTTON
+@mixin btn($color: $default-mixins-color) {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    outline: 0;
+    border: 0;
+    width: 100%;
+    padding: 15px;
+    background: $main-primary-color;
+    color: $color;
+    text-transform: uppercase;
+    border-radius: 15px;
+    opacity: 0.6;
+    transition: 0.5s;
+
+    &:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+}
+
+// MAIN TEXT INPUT
+@mixin input($bg-color: $default-mixins-color) {
+    font-family: $font-family;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    outline: 0;
+    font-size: 15px;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: $bg-color;
+}
+
+// MAIN LINK
+@mixin main-link($bg-color: $default-mixins-color) {
+    position: relative;
+    text-decoration: none;
+    color: $link-color;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        background-color: $bg-color;
+        transition: width 0.3s ease-in-out;
+    }
+
+    &:hover::before {
+        width: 100%;
+    }
+}
