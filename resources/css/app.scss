@@ -9,9 +9,5 @@ body {
 }
 
 .container {
-    width: 365px;
-    margin: 5% auto;
-    background-color: $main-element-bg-color;
-    border-radius: 15px;
-    box-shadow: 5px 5px darken($main-element-bg-color, 25%);;
+    margin: 0 30px;
 }

@@ -33,32 +33,30 @@ export default function Register() {
     }
 
     return (
-        <div className='container'>
-            <div className='form'>
-                <h1 className='auth-title'>Register</h1>
-                <form  className='register-form' onSubmit={handleSubmit}>
-                    <input type='text' name='name' placeholder='Name'
-                       value={registerForm?.name}
-                       onChange={handleInputChange}
-                    />
-                    <input type='email' name='email' placeholder='Email'
-                       value={registerForm?.email}
-                       onChange={handleInputChange}
-                    />
-                    <input type='password' name='password' placeholder='Password'
-                       value={registerForm?.password}
-                       onChange={handleInputChange}
-                    />
-                    <input type='password' name='password_confirmation' placeholder='Repeat password'
-                       value={registerForm?.password_confirmation}
-                       onChange={handleInputChange}
-                    />
-                    <button type='submit' className='btn'>Submit</button>
-                    <p className='message'>
-                        <Link to="/login">Sign in</Link>
-                    </p>
-                </form>
-            </div>
+        <div className='form'>
+            <h1 className='auth-title'>Register</h1>
+            <form  className='register-form' onSubmit={handleSubmit}>
+                <input type='text' name='name' placeholder='Name'
+                   value={registerForm?.name}
+                   onChange={handleInputChange}
+                />
+                <input type='email' name='email' placeholder='Email'
+                   value={registerForm?.email}
+                   onChange={handleInputChange}
+                />
+                <input type='password' name='password' placeholder='Password'
+                   value={registerForm?.password}
+                   onChange={handleInputChange}
+                />
+                <input type='password' name='password_confirmation' placeholder='Repeat password'
+                   value={registerForm?.password_confirmation}
+                   onChange={handleInputChange}
+                />
+                <button type='submit' className='btn'>Submit</button>
+                <p className='message'>
+                    <Link to="/login">Sign in</Link>
+                </p>
+            </form>
         </div>
     );
 }

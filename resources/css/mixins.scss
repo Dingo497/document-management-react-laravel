@@ -1,6 +1,13 @@
 @import './variables';
 $default-mixins-color: #f5f5f5;
 
+@mixin container() {
+    margin: 5% auto;
+    background-color: $main-element-bg-color;
+    border-radius: 15px;
+    box-shadow: 5px 5px darken($main-element-bg-color, 25%);
+}
+
 // MAIN BUTTON
 @mixin btn($color: $default-mixins-color) {
     font-family: 'Roboto', sans-serif;

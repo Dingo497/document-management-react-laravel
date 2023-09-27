@@ -30,24 +30,22 @@ export default function Login() {
     }
 
     return (
-        <div className='container'>
-            <div className='form'>
-                <h1 className='auth-title'>Login</h1>
-                <form className='login-form' onSubmit={handleSubmit}>
-                    <input type='email' name='email' placeholder='Email'
-                       value={loginForm?.email}
-                       onChange={handleInputChange}
-                    />
-                    <input type='password' name='password' placeholder='Password'
-                       value={loginForm?.password}
-                       onChange={handleInputChange}
-                    />
-                    <button type='submit' className='btn'>Login</button>
-                    <p className='message'>
-                        <Link to="/register">Create an account</Link>
-                    </p>
-                </form>
-            </div>
+        <div className='form'>
+            <h1 className='auth-title'>Login</h1>
+            <form className='login-form' onSubmit={handleSubmit}>
+                <input type='email' name='email' placeholder='Email'
+                   value={loginForm?.email}
+                   onChange={handleInputChange}
+                />
+                <input type='password' name='password' placeholder='Password'
+                   value={loginForm?.password}
+                   onChange={handleInputChange}
+                />
+                <button type='submit' className='btn'>Login</button>
+                <p className='message'>
+                    <Link to="/register">Create an account</Link>
+                </p>
+            </form>
         </div>
     );
 }
