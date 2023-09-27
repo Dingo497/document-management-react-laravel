@@ -8,7 +8,7 @@ import AuthRoute from "./router/AuthRoute";
 
 import ReactDOM from 'react-dom/client';
 import {Provider} from "react-redux";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import store from "./redux/store";
 
 
@@ -16,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('app')).render(
     <Provider store={store}>
         <BrowserRouter>
             <Routes>
+                <Route path="/" element={<Navigate to="/dashboard" />} />
                 <Route path="/register" element={ <Register/> } />
                 <Route path="/login" element={ <Login/> } />
                 <Route
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById('app')).render(
                         </AuthRoute>
                     }
                 />
+                <Route path="*" element={<Navigate to="/dashboard" />} />
             </Routes>
         </BrowserRouter>
     </Provider>
