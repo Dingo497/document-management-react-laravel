@@ -16,9 +16,21 @@ table {
         color: $main-element-bg-color;
     }
 
+    th:last-child {
+        text-align: right;
+    }
+
     td {
         padding: 15px 25px;
         font-size: 18px;
+    }
+
+    td:last-child {
+        margin-top: 5px;
+        margin-right: 25px;
+        padding: 0;
+        display: flex;
+        justify-content: end;
     }
 
     tr:nth-child(even) {

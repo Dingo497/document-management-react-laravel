@@ -1,0 +1,30 @@
+@import '../variables';
+@import '../mixins';
+
+@include shake-animation();
+
+.action-button-edit {
+    background-color: $link-color;
+}
+.action-button-download {
+    background-color: $success;
+}
+.action-button-remove {
+    background-color: $main-primary-color;
+}
+
+.action-button {
+    margin: 0 5px;
+    border-radius: 50%;
+    padding: 5px 10px;
+    color: $main-element-bg-color;
+    font-size: 24px;
+    display: flex;
+    flex-direction: row;
+    transition: 0.4s;
+
+    &:hover {
+        cursor: pointer;
+        animation: shake-animation .3s;
+    }
+}

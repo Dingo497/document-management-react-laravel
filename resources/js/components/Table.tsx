@@ -1,6 +1,9 @@
 import '../../css/components/TableComponent.scss';
+import ActionButton from "./ActionButton";
+
 export default function Table() {
 
+    // @ts-ignore
     return (
         <table>
             <thead>
@@ -14,7 +17,11 @@ export default function Table() {
                 <tr>
                     <td>Nazov suboru 1</td>
                     <td>[pdf] [doc]</td>
-                    <td>[edit] [download] [remove]</td>
+                    <td>
+                        <ActionButton type='edit'></ActionButton>
+                        <ActionButton type='download'></ActionButton>
+                        <ActionButton type='remove'></ActionButton>
+                    </td>
                 </tr>
                 <tr>
                     <td>Nazov suboru 1</td>
