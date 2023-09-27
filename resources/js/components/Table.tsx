@@ -23,21 +23,6 @@ export default function Table() {
                         <ActionButton type='remove'></ActionButton>
                     </td>
                 </tr>
-                <tr>
-                    <td>Nazov suboru 1</td>
-                    <td>[pdf] [doc]</td>
-                    <td>[edit] [download] [remove]</td>
-                </tr>
-                <tr>
-                    <td>Nazov suboru 1</td>
-                    <td>[pdf] [doc]</td>
-                    <td>[edit] [download] [remove]</td>
-                </tr>
-                <tr>
-                    <td>Nazov suboru 1</td>
-                    <td>[pdf] [doc]</td>
-                    <td>[edit] [download] [remove]</td>
-                </tr>
             </tbody>
         </table>
     )

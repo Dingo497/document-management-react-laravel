@@ -12,6 +12,7 @@ export default function Dashboard() {
     return (
         <>
         <Header />
+        <button className='create-new-document' >Create new document</button>
         <div className='container'>
             <Table />
         </div>
