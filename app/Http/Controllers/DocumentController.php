@@ -9,9 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class DocumentController extends Controller {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(): jsonResponse {
         $user = Auth::user();
         return response()->json([
@@ -22,9 +20,6 @@ class DocumentController extends Controller {
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreDocumentRequest $request): jsonResponse {
         $document = $request->validated();
 
@@ -40,11 +35,7 @@ class DocumentController extends Controller {
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Document $document): jsonResponse {
-        // TODO show len pre prihlaseneho
         return response()->json([
             'status' => 'success',
             'data' => [
@@ -53,20 +44,11 @@ class DocumentController extends Controller {
         ]);
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateDocumentRequest $request, Document $document)
-    {
-        // TODO dokoncim ked budem mat image upadte
+    public function update(UpdateDocumentRequest $request, Document $document) {
+        // TODO dokoncim ked budem mat image update
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Document $document): jsonResponse {
-        // TODO delete len pre prihlaseneho
         $document->delete();
         return response()->json([
             'status' => 'success',
