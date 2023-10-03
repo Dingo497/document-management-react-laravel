@@ -1,0 +1,66 @@
+@import '../variables';
+@import '../mixins';
+
+.document-form {
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    @include container();
+    overflow: hidden;
+    padding: 30px;
+
+    .document-input {
+        @include input;
+    }
+
+    .btn {
+        @include btn;
+        text-align: center;
+        width: 180px;
+    }
+
+    hr {
+        margin: 15px 0;
+        color: $main-element-bg-color;
+    }
+
+    .document-checkboxes {
+        margin: 30px 20px;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        gap: 50px;
+    }
+
+    .documment-checkbox {
+        input {
+            font: inherit;
+            width: 1.15em;
+            height: 1.15em;
+            border: 0.15em solid;
+            border-radius: 0.15em;
+            transform: translateY(-0.075em);
+        }
+        label {
+            font-size: 24px;
+            padding-left: 3px;
+        }
+    }
+
+    // UPLOAD BUTTON
+    .hidden {
+        display: none;
+    }
+    //.create-new-document {
+    //    height: 50px;
+    //    border: 1px dashed #BBB;
+    //    cursor:pointer;
+    //    position: relative;
+    //    width: 150px;
+    //    padding: 10px;
+    //    -webkit-border-radius: 5px;
+    //    -moz-border-radius: 5px;
+    //    text-align: center;
+    //    background-color: #DDD;
+    //}
+}
