@@ -10,9 +10,7 @@
 }
 
 .auth-title {
-    text-align: center;
-    color: $main-primary-color;
-    text-shadow: 2px 2px darken($main-primary-color, 20%);
+    @include main-title();
 }
 
 .form {
