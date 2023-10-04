@@ -12,16 +12,12 @@ export default function Dashboard() {
 
     const name = useSelector((state: AppStateTypes) => state.auth.user.name);
 
-    const handleCreateNewDocument = (e) => {
-        navigate('/create-document');
-    }
-
     return (
         <>
         <Header />
         <button
             className='create-new-document'
-            onClick={handleCreateNewDocument}
+            onClick={() => navigate('/create-document')}
         >
             Create new document
         </button>

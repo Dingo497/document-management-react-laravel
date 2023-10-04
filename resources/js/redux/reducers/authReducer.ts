@@ -1,7 +1,7 @@
-import { initialState } from "../constants/initialState";
+import { AuthInitialState } from "../constants/initialState";
 import { ActionTypes } from "../constants/actionTypes";
 
-const authReducer = (state = initialState, action: any) => {
+const authReducer = (state = AuthInitialState, action: any) => {
     switch (action.type) {
         case ActionTypes.SET_USER:
             return {
