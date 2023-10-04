@@ -1,15 +1,28 @@
 import '../../css/components/DocumentForm.scss';
-import {useState} from "react";
+
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getUserTagsAction} from "../redux/actions/tagActions";
+import {AppStateTypes, Tag} from "../redux/constants/appStateTypes";
 import {documentFormDataType} from "../types/document/documentTypes";
 
 
 export default function DocumentForm() {
+    const dispatch = useDispatch();
+
+    const token = useSelector((state: AppStateTypes) => state.auth.token);
+    const tags = useSelector((state: AppStateTypes) => state.tag.tags);
     const [formData, setFormData] = useState<documentFormDataType>({
        name: '',
        tags: [],
        image: null
     });
     const [stringTags, setStringTags] = useState<string[]>([]);
+
+    useEffect(() => {
+        // @ts-ignore
+        dispatch(getUserTagsAction(token));
+    }, []);
 
     const handleChangeCheckbox = (e) => {
         if (e.target.checked) {
@@ -44,6 +57,21 @@ export default function DocumentForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (formData.image) {
+            const maxSizeInBytes = 5 * 1024 * 1024; // 5MB
+            if (
+                formData.image.type === 'application/pdf'
+                ||
+                formData.image.size <= maxSizeInBytes
+            ) {
+                // TODO volat api...
+            } else {
+                // TODO chybu vypisat ze len pdf
+            }
+        } else {
+            // TODO chybu vypisat ze neni file
+        }
     }
 
     return (
@@ -67,22 +95,16 @@ export default function DocumentForm() {
                 value={stringTags ?? ''}
             />
             <div className='document-checkboxes'>
-                <div className='documment-checkbox'>
-                    <input type='checkbox' value='1' onChange={handleChangeCheckbox}/>
-                    <label>tag1</label>
-                </div>
-                <div className='documment-checkbox'>
-                    <input type='checkbox' value='2' onChange={handleChangeCheckbox}/>
-                    <label>tag2</label>
-                </div>
-                <div className='documment-checkbox'>
-                    <input type='checkbox' value='3' onChange={handleChangeCheckbox}/>
-                    <label>tag3</label>
-                </div>
-                <div className='documment-checkbox'>
-                    <input type='checkbox' value='4' onChange={handleChangeCheckbox}/>
-                    <label>tag4</label>
-                </div>
+                {tags?.map((tag: Tag) => (
+                    <div key={tag.id} className='documment-checkbox'>
+                        <input
+                            type='checkbox'
+                            value={tag.id}
+                            onChange={handleChangeCheckbox}
+                        />
+                        <label>{tag.name}</label>
+                    </div>
+                ))}
             </div>
             <div className='btn' onClick={handleUploadFileButton}>
                 Click to upload file

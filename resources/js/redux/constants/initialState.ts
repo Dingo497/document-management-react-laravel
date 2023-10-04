@@ -1,8 +1,17 @@
-import { InitialStateAuthType } from "./appStateTypes";
+import {InitialStateAuthType, Tags} from "./appStateTypes";
 
-export const initialState: InitialStateAuthType = {
+export const AuthInitialState: InitialStateAuthType = {
     user: null,
     token: null,
+};
+
+export const TagsInitialState: Tags = {
+    tags: [
+        {
+            id: null,
+            name: null,
+        }
+    ]
 };
 
 // export const initialState: InitialStateAuthType = {
@@ -10,7 +19,6 @@ export const initialState: InitialStateAuthType = {
 //         id: 2,
 //         name: 'asd',
 //         email: 'asd@asd.asd',
-//         created_at: '2023-09-26T18:19:54.000000Z',
 //     },
 //     token: '24|skfMT4CEuKpw9hCGXcTVyZ9wEl09sHdA7NTqIqUY7253e471',
 // };
