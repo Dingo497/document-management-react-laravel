@@ -19,3 +19,10 @@ export const createUserDocument = (token: ApiToken, document: NewDocumentType): 
         'content-type': 'multipart/form-data',
     },
 });
+
+export const downloadUserDocument = (token: ApiToken, documentFileUrl: string): Promise<AxiosResponse> => backendAPI.get('documents/download/' + documentFileUrl,{
+    headers: {
+        Authorization: `Bearer ${token}`,
+        responseType: 'blob',
+    },
+});

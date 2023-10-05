@@ -20,6 +20,7 @@ export default function Table() {
             {documents?.map((document: Document) => (
                 <TableRow
                     key={ document.id }
+                    documentID={ document.id }
                     name={ document.name }
                     tags={ document.tags ?? [] }
                 />

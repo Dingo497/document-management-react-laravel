@@ -8,6 +8,7 @@ use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller {
 
@@ -65,6 +66,19 @@ class DocumentController extends Controller {
         $document->delete();
         return response()->json([
             'status' => 'success',
+        ]);
+    }
+
+    public function download($filename) {
+        $path = storage_path("app/documents/{$filename}");
+
+        if (!Storage::exists($path)) {
+            abort(404);
+        }
+
+        return response()->download($path, $filename, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . $filename . '"',
         ]);
     }
 }

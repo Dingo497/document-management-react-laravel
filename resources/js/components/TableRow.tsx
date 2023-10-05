@@ -2,8 +2,8 @@ import ActionButton from "./ActionButton";
 import {TagType} from "../redux/constants/appStateTypes";
 import Tag from "./Tag";
 
-export default function TableRow(props: {name: string, tags: TagType[]}) {
-    const {name, tags} = props;
+export default function TableRow(props: {documentID: string, name: string, tags: TagType[]}) {
+    const {documentID, name, tags} = props;
 
     return (
         <tr>
@@ -19,9 +19,9 @@ export default function TableRow(props: {name: string, tags: TagType[]}) {
                 </div>
             </td>
             <td>
-                <ActionButton type='edit'></ActionButton>
-                <ActionButton type='download'></ActionButton>
-                <ActionButton type='remove'></ActionButton>
+                <ActionButton documentID={documentID} type='edit'/>
+                <ActionButton documentID={documentID} type='download'/>
+                <ActionButton documentID={documentID} type='remove'/>
             </td>
         </tr>
     );
