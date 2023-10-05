@@ -14,10 +14,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('document_tag', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Document::class, 'document_id');
-            $table->foreignIdFor(Tag::class, 'tag_id');
-            $table->unique(['document_id', 'tag_id']);
+            $table->unsignedBigInteger('document_id');
+            $table->unsignedBigInteger('tag_id');
+            $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+            $table->primary(['document_id', 'tag_id']);
             $table->timestamps();
         });
     }
