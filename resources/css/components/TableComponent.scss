@@ -8,6 +8,12 @@ table {
     @include container();
     overflow: hidden;
 
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
     th {
         padding: 20px 25px;
         font-size: 22px;
@@ -45,7 +51,7 @@ table {
         width: 40%;
     }
     .document-tags {
-        width: 40%;
+        width: 60%;
     }
     .document-actions {
         width: 20%;

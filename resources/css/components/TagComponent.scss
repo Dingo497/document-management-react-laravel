@@ -1,0 +1,8 @@
+@import '../variables';
+@import '../mixins';
+
+.tag {
+    @include btn($background: $success, $opacity: 1);
+    max-width: 120px;
+    text-align: center;
+}

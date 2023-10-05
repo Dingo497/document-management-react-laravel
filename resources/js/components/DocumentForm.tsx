@@ -3,12 +3,15 @@ import '../../css/components/DocumentForm.scss';
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getUserTagsAction} from "../redux/actions/tagActions";
-import {AppStateTypes, Tag} from "../redux/constants/appStateTypes";
+import {AppStateTypes, TagType} from "../redux/constants/appStateTypes";
 import {documentFormDataType} from "../types/document/documentTypes";
+import {createUserDocumentAction} from "../redux/actions/documentActions";
+import {useNavigate} from "react-router-dom";
 
 
 export default function DocumentForm() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const token = useSelector((state: AppStateTypes) => state.auth.token);
     const tags = useSelector((state: AppStateTypes) => state.tag.tags);
@@ -65,12 +68,21 @@ export default function DocumentForm() {
                 ||
                 formData.image.size <= maxSizeInBytes
             ) {
-                // TODO volat api...
+                createNewDocument();
             } else {
                 // TODO chybu vypisat ze len pdf
             }
         } else {
             // TODO chybu vypisat ze neni file
+        }
+    }
+
+    // @ts-ignore
+    const createNewDocument = async () => {
+        // @ts-ignore
+        const response = await dispatch(createUserDocumentAction(token, formData));
+        if (response) {
+            navigate('/dashboard');
         }
     }
 
@@ -95,7 +107,7 @@ export default function DocumentForm() {
                 value={stringTags ?? ''}
             />
             <div className='document-checkboxes'>
-                {tags?.map((tag: Tag) => (
+                {tags?.map((tag: TagType) => (
                     <div key={tag.id} className='documment-checkbox'>
                         <input
                             type='checkbox'

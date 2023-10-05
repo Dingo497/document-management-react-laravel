@@ -47,11 +47,11 @@ class User extends Authenticatable
         'id', 'name', 'email', 'created_at'
     ];
 
-    public function documents(): HasMany {
+    public function documents() {
         return $this->hasMany(Document::class);
     }
 
-    public function tags(): HasMany {
+    public function tags() {
         return $this->hasMany(Tag::class);
     }
 }

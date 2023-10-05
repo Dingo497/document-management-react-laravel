@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DocumentResource;
 use App\Models\Document;
 use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
@@ -12,10 +13,13 @@ class DocumentController extends Controller {
 
     public function index(): jsonResponse {
         $user = Auth::user();
+        $userDocumentsWithTags = $user->documents()->with('tags')->get();
+
+
         return response()->json([
             'status' => 'success',
             'data' => [
-                'documents' => $user->documents(),
+                'documents' => DocumentResource::collection($userDocumentsWithTags),
             ],
         ]);
     }
@@ -23,14 +27,23 @@ class DocumentController extends Controller {
     public function store(StoreDocumentRequest $request): jsonResponse {
         $document = $request->validated();
 
-       // TODO nahratie obrazka
+        $file = $request->file('image');
+        $path = $file->store('documents');
 
-        Document::create($document);
+        $newDocument = Document::create([
+            'image' => $path,
+            'user_id' => $document['user_id'],
+            'name' => $document['name']
+        ]);
+
+        $tagIds = $document['tags'];
+        $newDocument->tags()->sync($tagIds);
+        $userDocumentsWithTags = Document::where('id', $newDocument->id)->with('tags')->get();
 
         return response()->json([
             'status' => 'success',
             'data' => [
-                'documents' => $document,
+                'documents' => DocumentResource::collection($userDocumentsWithTags),
             ],
         ]);
     }

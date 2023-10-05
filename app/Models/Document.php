@@ -22,11 +22,17 @@ class Document extends Model
         'image',
     ];
 
-    public function user(): BelongsTo {
+    protected $visible = [
+        'id',
+        'name',
+        'image',
+    ];
+
+    public function user() {
         return $this->belongsTo(User::class);
     }
 
-    public function tags(): BelongsToMany {
+    public function tags() {
         return $this->belongsToMany(Tag::class);
     }
 }

@@ -19,11 +19,11 @@ class Tag extends Model {
         'id', 'name'
     ];
 
-    public function user(): BelongsTo {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 
-    public function documents(): BelongsToMany {
+    public function documents() {
         return $this->belongsToMany(Document::class);
     }
 }

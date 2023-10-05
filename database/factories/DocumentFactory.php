@@ -17,7 +17,7 @@ class DocumentFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => 'Dokument - ' . fake()->name(),
             'user_id' => 1,
             'image' => null,
         ];

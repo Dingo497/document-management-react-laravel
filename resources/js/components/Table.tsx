@@ -1,9 +1,12 @@
 import '../../css/components/TableComponent.scss';
-import ActionButton from "./ActionButton";
+import {useSelector} from "react-redux";
+import {AppStateTypes, Document} from "../redux/constants/appStateTypes";
+import TableRow from "./TableRow";
 
 export default function Table() {
 
-    // @ts-ignore
+    const documents = useSelector((state: AppStateTypes) => state.document.documents);
+
     return (
         <table>
             <thead>
@@ -14,15 +17,13 @@ export default function Table() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Nazov suboru 1</td>
-                    <td>[pdf] [doc]</td>
-                    <td>
-                        <ActionButton type='edit'></ActionButton>
-                        <ActionButton type='download'></ActionButton>
-                        <ActionButton type='remove'></ActionButton>
-                    </td>
-                </tr>
+            {documents?.map((document: Document) => (
+                <TableRow
+                    key={ document.id }
+                    name={ document.name }
+                    tags={ document.tags ?? [] }
+                />
+            ))}
             </tbody>
         </table>
     )

@@ -1,11 +1,11 @@
-import {InitialStateAuthType, Tags} from "./appStateTypes";
+import {InitialStateAuthType, TagsType, Documents} from "./appStateTypes";
 
 export const AuthInitialState: InitialStateAuthType = {
     user: null,
     token: null,
 };
 
-export const TagsInitialState: Tags = {
+export const TagsInitialState: TagsType = {
     tags: [
         {
             id: null,
@@ -13,6 +13,17 @@ export const TagsInitialState: Tags = {
         }
     ]
 };
+
+export const DocumentsInitialState: Documents = {
+    documents: [
+        {
+            id: null,
+            name: null,
+            image: null,
+            tags: []
+        }
+    ]
+}
 
 // export const initialState: InitialStateAuthType = {
 //     user: {

@@ -32,6 +32,9 @@ class StoreDocumentRequest extends FormRequest
         return [
             'user_id' => 'required|integer',
             'name' => 'required|string|unique:documents|max:100',
+            'image' => 'required|mimes:pdf|max:5000',
+            'tags' => 'required|array',
+            'tags.*' => 'required|string'
         ];
     }
 }
