@@ -1,6 +1,6 @@
 import {AxiosResponse} from "axios";
 import {backendAPI} from "./index";
-import {ApiToken} from "../types/auth/authTypes";
+import {ApiStatusResponse, ApiToken} from "../types/auth/authTypes";
 import {
     ApiCreateDocumentSuccessResponse,
     ApiDocumentSuccessResponse,
@@ -17,6 +17,12 @@ export const createUserDocument = (token: ApiToken, document: NewDocumentType): 
     headers: {
         Authorization: `Bearer ${token}`,
         'content-type': 'multipart/form-data',
+    },
+});
+
+export const removeUserDocument =  (token: ApiToken, documentID: number): Promise<AxiosResponse<ApiStatusResponse>> => backendAPI.delete('documents/' + documentID, {
+    headers: {
+        Authorization: `Bearer ${token}`,
     },
 });
 

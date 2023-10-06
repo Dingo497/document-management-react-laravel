@@ -1,6 +1,6 @@
 import { ActionTypes } from "../constants/actionTypes";
 import {ApiToken} from "../../types/auth/authTypes";
-import {createUserDocument, getUserDocuments} from "../../http/documentApi";
+import {createUserDocument, getUserDocuments, removeUserDocument} from "../../http/documentApi";
 import {Document, NewDocumentType} from "../constants/appStateTypes";
 
 export const getUserDocumentsAction = (token: ApiToken) => {
@@ -36,4 +36,21 @@ export const setUserDocumentsAction = (document: NewDocumentType | Document[]) =
         type: ActionTypes.SET_DOCUMENTS,
         documents: document
     };
+}
+
+export const removeUserDocumentAction = (token: ApiToken, documentID: number) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await removeUserDocument(token, documentID);
+            if (data.status === 'success') {
+                return dispatch({
+                    type: ActionTypes.REMOVE_DOCUMENT,
+                    documentID: documentID
+                });
+            }
+        } catch (error) {
+            // TODO: spravit nejake zobrazovanie chyb
+            return console.log(error.response.data);
+        }
+    }
 }

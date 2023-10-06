@@ -3,4 +3,5 @@ export const ActionTypes = {
     LOGOUT: 'LOGOUT',
     SET_TAGS: 'SET_TAGS',
     SET_DOCUMENTS: 'SET_DOCUMENTS',
+    REMOVE_DOCUMENT: 'REMOVE_DOCUMENT'
 };

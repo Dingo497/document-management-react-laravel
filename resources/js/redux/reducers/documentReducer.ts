@@ -8,6 +8,11 @@ const documentReducer = (state = DocumentsInitialState, action: any) => {
                 ...state,
                 documents: action.documents
             };
+        case ActionTypes.REMOVE_DOCUMENT:
+            const updatedDocuments = state.documents.filter(doc => doc.id !== action.documentID);
+            return {
+                documents: updatedDocuments
+            }
         default:
             return state;
     }

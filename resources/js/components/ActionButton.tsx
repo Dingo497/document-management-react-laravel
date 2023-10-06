@@ -3,11 +3,13 @@ import { ButtonProps } from "../types/components/ActionButton";
 import {AiOutlineDownload, AiOutlineEdit, AiOutlineDelete} from "react-icons/ai";
 import {useNavigate} from "react-router-dom";
 import {downloadUserDocument} from "../http/documentApi";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppStateTypes} from "../redux/constants/appStateTypes";
+import {removeUserDocumentAction} from "../redux/actions/documentActions";
 
 export default function ActionButton({documentID, type}: ButtonProps) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const token = useSelector((state: AppStateTypes) => state.auth.token);
     const currentDocument = useSelector((state: AppStateTypes) =>
@@ -53,7 +55,8 @@ export default function ActionButton({documentID, type}: ButtonProps) {
     }
 
     const handleRemoveDocument = () => {
-
+        // @ts-ignore
+        dispatch(removeUserDocumentAction(token, documentID));
     }
 
     return (
