@@ -1,0 +1,83 @@
+@import '../variables';
+@import '../mixins';
+
+.alert {
+    position: absolute;
+    top: 30px;
+    width: 400px;
+    padding: 16px;
+    margin: 8px;
+    border-radius: 5px;
+    opacity: 0;
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+    }
+
+    &.show {
+        animation: fadeIn 1s forwards;
+    }
+    &.hide {
+        animation: fadeOut 1s forwards;
+    }
+}
+
+.alert-title {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+.alert-content {
+    margin: 0;
+    font-size: 15px;
+}
+
+.alert-close {
+    position: relative;
+    left: 378px;
+    bottom: 58px;
+    font-size: 30px;
+    cursor: pointer;
+    opacity: .4;
+    transition: 0.5s;
+
+    &:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+}
+
+@mixin alert($color) {
+    border-left: 8px solid $color;
+    background-color: $main-element-bg-color;
+    .alert-title {
+        color: $color;
+    }
+}
+
+.alert-success {
+    @include alert($success-color);
+}
+
+.alert-danger {
+    @include alert($danger-color);
+}

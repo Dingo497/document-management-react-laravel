@@ -11,8 +11,7 @@ export const registerAction = (userData: AuthRegisterForm) => {
                 token: data.token
             }));
         } catch (error) {
-            // TODO: spravit nejake zobrazovanie chyb
-            return console.log(error.response.data);
+            return error.response.data;
         }
     }
 }
@@ -26,8 +25,7 @@ export const loginAction = (userData: AuthLoginForm) => {
                 token: data.token
             }));
         } catch (error) {
-            // TODO: spravit nejake zobrazovanie chyb
-            return console.log(error.response.data);
+            return error.response.data;
         }
     }
 }
@@ -38,7 +36,7 @@ export const logoutAction = (token: ApiToken) => {
             await logout(token);
             return dispatch(removeUserAction());
         } catch (error) {
-            // TODO: spravit nejake zobrazovanie chyb
+            // nedokonceny error handling
             return console.log(error.response.data);
         }
     }

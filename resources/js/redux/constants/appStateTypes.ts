@@ -49,6 +49,12 @@ export type ApiEditDocumentSuccessResponse = ApiStatusResponse & ApiToken & {
     }
 }
 
+export type alertDataType = {
+    type: 'danger' | 'success',
+    title: string,
+    messages: [],
+}
+
 // Stav Auth casti aplikacie
 export type InitialStateAuthType = {
     user: User | null;

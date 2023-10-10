@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import {Link, useNavigate} from 'react-router-dom';
 import { loginAction } from "../redux/actions/authActions";
 import { AuthLoginForm } from "../types/auth/authTypes";
+import Alert from "../components/Alert";
+import {alertDataType} from "../redux/constants/appStateTypes";
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -12,6 +14,11 @@ export default function Login() {
     const [loginForm, setLoginForm] = useState<AuthLoginForm>({
         email: '',
         password: '',
+    });
+    const [alert, setAlert] = useState<alertDataType>({
+        type: 'danger',
+        title: '',
+        messages: []
     });
 
     const handleInputChange = (e) => {
@@ -24,12 +31,19 @@ export default function Login() {
         e.preventDefault();
         // @ts-ignore
         const response = await dispatch(loginAction(loginForm));
-        if (response) {
+        if (!response.errors) {
             navigate('/dashboard');
+        } else {
+            setAlert({
+                type: 'danger',
+                title: 'ERROR',
+                messages: response.errors
+            });
         }
     }
 
     return (
+    <>
         <div className='form'>
             <h1 className='auth-title'>Login</h1>
             <form className='login-form' onSubmit={handleSubmit}>
@@ -47,5 +61,11 @@ export default function Login() {
                 </p>
             </form>
         </div>
+        <Alert
+            type={alert.type}
+            title={alert.title}
+            messages={alert.messages}
+        />
+    </>
     );
 }

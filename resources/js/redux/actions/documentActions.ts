@@ -11,7 +11,7 @@ export const getUserDocumentsAction = (token: ApiToken) => {
                 return dispatch(setUserDocumentsAction(data.data.documents));
             }
         } catch (error) {
-            // TODO: spravit nejake zobrazovanie chyb
+            // nedokoncene zobrazenie chyby
             return console.log(error.response.data);
         }
     }
@@ -25,8 +25,7 @@ export const createUserDocumentAction = (token: ApiToken, documents: NewDocument
                 return dispatch(setUserDocumentsAction(data.data.documents));
             }
         } catch (error) {
-            // TODO: spravit nejake zobrazovanie chyb
-            return console.log(error.response.data);
+            return error.response.data;
         }
     }
 }
@@ -39,8 +38,7 @@ export const editUserDocumentAction = (token: ApiToken, documents/*: EditDocumen
                 return dispatch(editUserDocumentsAction(data.data.documents));
             }
         } catch (error) {
-            // TODO: spravit nejake zobrazovanie chyb
-            return console.log(error.response.data);
+            return error.response.data;
         }
     }
 }
@@ -70,7 +68,7 @@ export const removeUserDocumentAction = (token: ApiToken, documentID: number) =>
                 });
             }
         } catch (error) {
-            // TODO: spravit nejake zobrazovanie chyb
+            // nedokoncene zobrazenie chyby
             return console.log(error.response.data);
         }
     }

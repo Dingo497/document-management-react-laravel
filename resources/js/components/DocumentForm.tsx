@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getUserTagsAction} from "../redux/actions/tagActions";
 import {
+    alertDataType,
     AppStateTypes,
     Document,
     TagType
@@ -11,6 +12,7 @@ import {
 import {createUserDocumentAction, editUserDocumentAction} from "../redux/actions/documentActions";
 import {useNavigate} from "react-router-dom";
 import {documentFormDataType} from "../types/document/documentTypes";
+import Alert from "./Alert";
 
 
 export default function DocumentForm(props: {editDocument :Document|null}) {
@@ -27,6 +29,11 @@ export default function DocumentForm(props: {editDocument :Document|null}) {
         image: null
     });
     const [stringTags, setStringTags] = useState<string[]>([]);
+    const [alert, setAlert] = useState<alertDataType>({
+        type: 'danger',
+        title: '',
+        messages: []
+    });
 
     useEffect(() => {
         if (editDocument) {
@@ -76,26 +83,15 @@ export default function DocumentForm(props: {editDocument :Document|null}) {
         e.preventDefault();
 
         if (formData.image) {
-            const maxSizeInBytes = 5 * 1024 * 1024; // 5MB
-            if (
-                formData.image.type === 'application/pdf'
-                ||
-                formData.image.size <= maxSizeInBytes
-            ) {
-                if (editDocument) {
-                    editCurrentDocument();
-                } else {
-                    createNewDocument();
-                }
+            if (editDocument) {
+                editCurrentDocument();
             } else {
-                // TODO chybu vypisat ze len pdf
+                createNewDocument();
             }
         } else {
             if (editDocument) {
                 // lebo pre edit to nieje povinne potom prepisat
                 editCurrentDocument();
-            } else {
-                // TODO chybu vypisat ze neni file
             }
         }
     }
@@ -104,8 +100,14 @@ export default function DocumentForm(props: {editDocument :Document|null}) {
     const createNewDocument = async () => {
         // @ts-ignore
         const response = await dispatch(createUserDocumentAction(token, formData));
-        if (response) {
+        if (!response.errors) {
             navigate('/dashboard');
+        } else {
+            setAlert({
+                type: 'danger',
+                title: 'ERROR',
+                messages: response.errors
+            });
         }
     }
 
@@ -119,12 +121,19 @@ export default function DocumentForm(props: {editDocument :Document|null}) {
 
         // @ts-ignore
         const response = await dispatch(editUserDocumentAction(token, editFormData));
-        if (response) {
+        if (!response.errors) {
             navigate('/dashboard');
+        } else {
+            setAlert({
+                type: 'danger',
+                title: 'ERROR',
+                messages: response.errors
+            });
         }
     }
 
     return (
+        <>
         <form className='document-form' onSubmit={handleSubmit} encType="multipart/form-data">
             <input
                 type='text'
@@ -168,5 +177,11 @@ export default function DocumentForm(props: {editDocument :Document|null}) {
             <hr/>
             <button type='submit' className='btn'>Submit</button>
         </form>
+            <Alert
+                type={alert.type}
+                title={alert.title}
+                messages={alert.messages}
+            />
+        </>
     );
 }

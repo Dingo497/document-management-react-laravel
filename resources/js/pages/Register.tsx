@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { registerAction } from "../redux/actions/authActions";
 import {Link, useNavigate} from "react-router-dom";
 import { AuthRegisterForm } from "../types/auth/authTypes";
+import Alert from "../components/Alert";
+import {alertDataType} from "../redux/constants/appStateTypes";
 
 export default function Register() {
     const dispatch = useDispatch();
@@ -14,6 +16,11 @@ export default function Register() {
         email: '',
         password: '',
         password_confirmation: '',
+    });
+    const [alert, setAlert] = useState<alertDataType>({
+        type: 'danger',
+        title: '',
+        messages: []
     });
 
     const handleInputChange = (e) => {
@@ -27,12 +34,19 @@ export default function Register() {
         // @ts-ignore Malo by to byt kvoli tomu ze klasicky redux nechape trunk-u. Cize si mysli ze moze vzdy vratit
         // len objekt ale nieje to tak vdaka trunku mozem vraciat aj funckie nemam nato cas to riesit
         const response = await dispatch(registerAction(registerForm));
-        if (response) {
+        if (!response.errors) {
             navigate('/dashboard');
+        } else {
+            setAlert({
+                type: 'danger',
+                title: 'ERROR',
+                messages: response.errors
+            });
         }
     }
 
     return (
+    <>
         <div className='form'>
             <h1 className='auth-title'>Register</h1>
             <form  className='register-form' onSubmit={handleSubmit}>
@@ -58,5 +72,11 @@ export default function Register() {
                 </p>
             </form>
         </div>
+        <Alert
+            type={alert.type}
+            title={alert.title}
+            messages={alert.messages}
+        />
+    </>
     );
 }
