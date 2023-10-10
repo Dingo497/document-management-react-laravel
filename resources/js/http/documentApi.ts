@@ -3,7 +3,7 @@ import {backendAPI} from "./index";
 import {ApiStatusResponse, ApiToken} from "../types/auth/authTypes";
 import {
     ApiCreateDocumentSuccessResponse,
-    ApiDocumentSuccessResponse,
+    ApiDocumentSuccessResponse, ApiEditDocumentSuccessResponse, EditDocumentType,
     NewDocumentType
 } from "../redux/constants/appStateTypes";
 
@@ -16,7 +16,14 @@ export const getUserDocuments =  (token: ApiToken): Promise<AxiosResponse<ApiDoc
 export const createUserDocument = (token: ApiToken, document: NewDocumentType): Promise<AxiosResponse<ApiCreateDocumentSuccessResponse>> => backendAPI.post('documents', document, {
     headers: {
         Authorization: `Bearer ${token}`,
-        'content-type': 'multipart/form-data',
+        'Content-type': 'multipart/form-data',
+    },
+});
+
+export const editUserDocument = (token: ApiToken, document: EditDocumentType): Promise<AxiosResponse<ApiEditDocumentSuccessResponse>> => backendAPI.post('documents/' + document.id, document, {
+    headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-type': 'multipart/form-data',
     },
 });
 

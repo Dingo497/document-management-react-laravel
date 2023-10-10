@@ -13,6 +13,18 @@ const documentReducer = (state = DocumentsInitialState, action: any) => {
             return {
                 documents: updatedDocuments
             }
+        case ActionTypes.EDIT_DOCUMENT:
+            const updatedDocument = action.updatedDocument;
+            // @ts-ignore
+            const documentIndex = state.documents.findIndex(doc => doc.id === updatedDocument.id);
+            const documents = [...state.documents];
+            if (documentIndex !== -1) {
+                documents[documentIndex] = updatedDocument;
+            }
+            return {
+                ...state,
+                documents: documents
+            };
         default:
             return state;
     }

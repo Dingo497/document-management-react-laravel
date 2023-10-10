@@ -1,7 +1,7 @@
 import { ActionTypes } from "../constants/actionTypes";
 import {ApiToken} from "../../types/auth/authTypes";
-import {createUserDocument, getUserDocuments, removeUserDocument} from "../../http/documentApi";
-import {Document, NewDocumentType} from "../constants/appStateTypes";
+import {createUserDocument, editUserDocument, getUserDocuments, removeUserDocument} from "../../http/documentApi";
+import {Document, EditDocumentType, NewDocumentType} from "../constants/appStateTypes";
 
 export const getUserDocumentsAction = (token: ApiToken) => {
     return async (dispatch) => {
@@ -31,10 +31,31 @@ export const createUserDocumentAction = (token: ApiToken, documents: NewDocument
     }
 }
 
+export const editUserDocumentAction = (token: ApiToken, documents/*: EditDocumentType*/) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await editUserDocument(token, documents);
+            if (data.status === 'success' && data.data.documents) {
+                return dispatch(editUserDocumentsAction(data.data.documents));
+            }
+        } catch (error) {
+            // TODO: spravit nejake zobrazovanie chyb
+            return console.log(error.response.data);
+        }
+    }
+}
+
 export const setUserDocumentsAction = (document: NewDocumentType | Document[]) => {
     return {
         type: ActionTypes.SET_DOCUMENTS,
         documents: document
+    };
+}
+
+export const editUserDocumentsAction = (updatedDocument: EditDocumentType) => {
+    return {
+        type: ActionTypes.EDIT_DOCUMENT,
+        updatedDocument: updatedDocument
     };
 }
 

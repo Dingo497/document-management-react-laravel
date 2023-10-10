@@ -28,6 +28,11 @@ export type NewDocumentType = {
     name: string | null;
     tags: number[]
 }
+export type EditDocumentType = {
+    id: string;
+    name: string;
+    tags: number[];
+}
 export type ApiDocumentSuccessResponse = ApiStatusResponse & ApiToken & {
     data: {
         documents: Document[],
@@ -36,6 +41,11 @@ export type ApiDocumentSuccessResponse = ApiStatusResponse & ApiToken & {
 export type ApiCreateDocumentSuccessResponse = ApiStatusResponse & ApiToken & {
     data: {
         documents: NewDocumentType,
+    }
+}
+export type ApiEditDocumentSuccessResponse = ApiStatusResponse & ApiToken & {
+    data: {
+        documents: EditDocumentType,
     }
 }
 

@@ -58,8 +58,33 @@ class DocumentController extends Controller {
         ]);
     }
 
-    public function update(UpdateDocumentRequest $request, Document $document) {
-        // TODO dokoncim ked budem mat image update
+    public function update(UpdateDocumentRequest $request, Document $document): jsonResponse {
+        $editedDocument = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $path = $file->store('documents');
+            $editedDocument['image'] = $path;
+        }
+
+        $document->update([
+            'name' => $editedDocument['name'],
+            'image' => $editedDocument['image'] ?? $document->image
+        ]);
+
+        if ($editedDocument['tags']) {
+            $tagIds = $editedDocument['tags'];
+            $document->tags()->sync($tagIds);
+        }
+
+        $userDocumentsWithTags = Document::where('id', $document->id)->with('tags')->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => [
+                'documents' => DocumentResource::collection($userDocumentsWithTags),
+            ],
+        ]);
     }
 
     public function destroy(Document $document): jsonResponse {

@@ -3,26 +3,40 @@ import '../../css/components/DocumentForm.scss';
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getUserTagsAction} from "../redux/actions/tagActions";
-import {AppStateTypes, TagType} from "../redux/constants/appStateTypes";
-import {documentFormDataType} from "../types/document/documentTypes";
-import {createUserDocumentAction} from "../redux/actions/documentActions";
+import {
+    AppStateTypes,
+    Document,
+    TagType
+} from "../redux/constants/appStateTypes";
+import {createUserDocumentAction, editUserDocumentAction} from "../redux/actions/documentActions";
 import {useNavigate} from "react-router-dom";
+import {documentFormDataType} from "../types/document/documentTypes";
 
 
-export default function DocumentForm() {
+export default function DocumentForm(props: {editDocument :Document|null}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const {editDocument} = props;
 
     const token = useSelector((state: AppStateTypes) => state.auth.token);
     const tags = useSelector((state: AppStateTypes) => state.tag.tags);
     const [formData, setFormData] = useState<documentFormDataType>({
-       name: '',
-       tags: [],
-       image: null
+        name: '',
+        tags: [],
+        image: null
     });
     const [stringTags, setStringTags] = useState<string[]>([]);
 
     useEffect(() => {
+        if (editDocument) {
+            setFormData({
+                name: editDocument.name,
+                tags: editDocument.tags.map(tag => parseInt(tag.id)),
+                image: null
+            });
+            setStringTags(editDocument.tags.map(tag => tag.name));
+        }
         // @ts-ignore
         dispatch(getUserTagsAction(token));
     }, []);
@@ -32,13 +46,13 @@ export default function DocumentForm() {
             setStringTags([...stringTags, e.target.nextElementSibling.innerText]);
             setFormData(prevFormData => ({
                 ...prevFormData,
-                tags: [...formData.tags, e.target.value]
+                tags: [...formData.tags, parseInt(e.target.value)]
             }));
         } else {
             setStringTags(stringTags.filter(tag => tag !== e.target.nextElementSibling.innerText));
             setFormData(prevFormData => ({
                 ...prevFormData,
-                tags: formData.tags.filter(tagID => tagID !== e.target.value)
+                tags: formData.tags.filter(tagID => tagID !== parseInt(e.target.value))
             }));
         }
     }
@@ -68,12 +82,21 @@ export default function DocumentForm() {
                 ||
                 formData.image.size <= maxSizeInBytes
             ) {
-                createNewDocument();
+                if (editDocument) {
+                    editCurrentDocument();
+                } else {
+                    createNewDocument();
+                }
             } else {
                 // TODO chybu vypisat ze len pdf
             }
         } else {
-            // TODO chybu vypisat ze neni file
+            if (editDocument) {
+                // lebo pre edit to nieje povinne potom prepisat
+                editCurrentDocument();
+            } else {
+                // TODO chybu vypisat ze neni file
+            }
         }
     }
 
@@ -81,6 +104,21 @@ export default function DocumentForm() {
     const createNewDocument = async () => {
         // @ts-ignore
         const response = await dispatch(createUserDocumentAction(token, formData));
+        if (response) {
+            navigate('/dashboard');
+        }
+    }
+
+    // @ts-ignore
+    const editCurrentDocument = async () => {
+        const editFormData = {
+            _method: 'PATCH',
+            id: editDocument.id,
+            ...formData,
+        }
+
+        // @ts-ignore
+        const response = await dispatch(editUserDocumentAction(token, editFormData));
         if (response) {
             navigate('/dashboard');
         }
@@ -112,6 +150,8 @@ export default function DocumentForm() {
                         <input
                             type='checkbox'
                             value={tag.id}
+                            // @ts-ignore includes nemozna ci co...
+                            checked={formData.tags.includes(tag.id)}
                             onChange={handleChangeCheckbox}
                         />
                         <label>{tag.name}</label>
