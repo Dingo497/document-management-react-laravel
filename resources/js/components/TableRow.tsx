@@ -13,6 +13,7 @@ export default function TableRow(props: {documentID: string, name: string, tags:
                     {tags.map((tag: TagType) => (
                         <Tag
                             key={ tag.id }
+                            tagID={ tag.id }
                             name={ tag.name }
                         />
                     ))}

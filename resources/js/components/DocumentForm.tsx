@@ -1,18 +1,14 @@
 import '../../css/components/DocumentForm.scss';
 
-import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getUserTagsAction} from "../redux/actions/tagActions";
-import {
-    alertDataType,
-    AppStateTypes,
-    Document,
-    TagType
-} from "../redux/constants/appStateTypes";
+import {alertDataType, AppStateTypes, Document} from "../redux/constants/appStateTypes";
 import {createUserDocumentAction, editUserDocumentAction} from "../redux/actions/documentActions";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {documentFormDataType} from "../types/document/documentTypes";
+
 import Alert from "./Alert";
+import TagList from "./TagList";
 
 
 export default function DocumentForm(props: {editDocument :Document|null}) {
@@ -44,8 +40,6 @@ export default function DocumentForm(props: {editDocument :Document|null}) {
             });
             setStringTags(editDocument.tags.map(tag => tag.name));
         }
-        // @ts-ignore
-        dispatch(getUserTagsAction(token));
     }, []);
 
     const handleChangeCheckbox = (e) => {
@@ -153,20 +147,11 @@ export default function DocumentForm(props: {editDocument :Document|null}) {
                 placeholder='Tags'
                 value={stringTags ?? ''}
             />
-            <div className='document-checkboxes'>
-                {tags?.map((tag: TagType) => (
-                    <div key={tag.id} className='documment-checkbox'>
-                        <input
-                            type='checkbox'
-                            value={tag.id}
-                            // @ts-ignore includes nemozna ci co...
-                            checked={formData.tags.includes(tag.id)}
-                            onChange={handleChangeCheckbox}
-                        />
-                        <label>{tag.name}</label>
-                    </div>
-                ))}
-            </div>
+            <TagList
+                tags={tags}
+                checkedTags={formData.tags}
+                onChangeCheckbox={handleChangeCheckbox}
+            />
             <div className='btn' onClick={handleUploadFileButton}>
                 Click to upload file
             </div>

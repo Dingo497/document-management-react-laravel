@@ -1,12 +1,14 @@
-import '../../css/components/HeaderComponent.scss';
+import '../../css/pages/Dashboard.scss';
 import {useDispatch, useSelector} from "react-redux";
-import { AppStateTypes } from "../redux/constants/appStateTypes";
+import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {getUserDocumentsAction} from "../redux/actions/documentActions";
+import {getUserTagsAction} from "../redux/actions/tagActions";
+import { AppStateTypes, Document } from "../redux/constants/appStateTypes";
 
 import Header from "../components/Header";
 import Table from "../components/Table";
-import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
-import {getUserDocumentsAction} from "../redux/actions/documentActions";
+import TagList from "../components/TagList";
 
 
 export default function Dashboard() {
@@ -14,11 +16,55 @@ export default function Dashboard() {
     const dispatch = useDispatch();
 
     const token = useSelector((state: AppStateTypes) => state.auth.token);
+    const tags = useSelector((state: AppStateTypes) => state.tag.tags);
+    const documents = useSelector((state: AppStateTypes) => state.document.documents);
+
+    const [filteredDocuments, setFilteredDocuments] = useState<Document[]>(documents);
+    const [tagsToFilter, setTagsToFilter] = useState<number[]>([]);
 
     useEffect(() => {
         // @ts-ignore
         dispatch(getUserDocumentsAction(token));
+        // @ts-ignore
+        dispatch(getUserTagsAction(token));
     }, []);
+
+    useEffect(() => {
+        setFilteredDocuments(documents);
+    }, [documents]);
+
+    // @ts-ignore
+    const handleChangeCheckbox = async (e) => {
+        console.log(e.target.checked);
+        if (e.target.checked) {
+            filterDocuments(e.target.value, 'add');
+        } else {
+            filterDocuments(e.target.value, 'remove');
+        }
+    }
+
+    // @ts-ignore
+    const filterDocuments = async (value: string, type: 'add'|'remove') => {
+        let updatedTagsToFilter;
+        if (type === 'add') {
+            updatedTagsToFilter = [
+                ...tagsToFilter,
+                parseInt(value)
+            ];
+        } else {
+            // @ts-ignore
+            updatedTagsToFilter = tagsToFilter.filter((tagId) => tagId !== parseInt(value));
+        }
+        await setTagsToFilter(updatedTagsToFilter);
+
+        const filteredDocs = documents.filter((document) => {
+            return updatedTagsToFilter.every((tagId) => {
+                // @ts-ignore
+                return document.tags.some((tag) => tag.id === tagId);
+            });
+        });
+        setFilteredDocuments(filteredDocs);
+    }
 
     return (
         <>
@@ -29,8 +75,15 @@ export default function Dashboard() {
             >
                 Create new document
             </button>
+            <div className="filter-container">
+                <TagList
+                    tags={tags}
+                    checkedTags={null} // TODO: tu vlozim to co sa ulozi po refreshi
+                    onChangeCheckbox={handleChangeCheckbox}
+                />
+            </div>
             <div className='container'>
-                <Table />
+                <Table documents={filteredDocuments} />
             </div>
         </>
     );

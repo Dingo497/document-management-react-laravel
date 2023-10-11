@@ -1,11 +1,9 @@
 import '../../css/components/TableComponent.scss';
-import {useSelector} from "react-redux";
-import {AppStateTypes, Document} from "../redux/constants/appStateTypes";
+import {Document} from "../redux/constants/appStateTypes";
 import TableRow from "./TableRow";
 
-export default function Table() {
-
-    const documents = useSelector((state: AppStateTypes) => state.document.documents);
+export default function Table(props: {documents: Document[]}) {
+    const {documents} = props;
 
     return (
         <table>

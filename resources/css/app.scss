@@ -12,16 +12,3 @@ body {
 .container {
     margin: 0 30px;
 }
-
-.create-new-document {
-    @include container;
-    @include btn($background: $success, $opacity: 0.8);
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -20px;
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 30px;
-}
