@@ -8,6 +8,11 @@ const documentReducer = (state = DocumentsInitialState, action: any) => {
                 ...state,
                 documents: action.documents
             };
+        case ActionTypes.SET_DOCUMENTS_PAGINATION:
+            return {
+                ...state,
+                documentsPagination: action.documentsPagination
+            }
         case ActionTypes.REMOVE_DOCUMENT:
             const updatedDocuments = state.documents.filter(doc => doc.id !== action.documentID);
             return {

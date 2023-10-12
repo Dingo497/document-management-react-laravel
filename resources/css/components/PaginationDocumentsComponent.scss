@@ -1,0 +1,19 @@
+@import '../variables';
+@import '../mixins';
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: -80px;
+
+    li {
+        a {
+            border-radius: 15px;
+        }
+        .active {
+            background-color: #FF5722;
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+    }
+}

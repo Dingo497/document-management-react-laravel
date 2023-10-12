@@ -2,12 +2,18 @@ import {AxiosResponse} from "axios";
 import {backendAPI} from "./index";
 import {ApiStatusResponse, ApiToken} from "../types/auth/authTypes";
 import {
-    ApiCreateDocumentSuccessResponse,
+    ApiCreateDocumentSuccessResponse, ApiDocumentPaginationSuccessResponse,
     ApiDocumentSuccessResponse, ApiEditDocumentSuccessResponse, EditDocumentType,
     NewDocumentType
 } from "../redux/constants/appStateTypes";
 
-export const getUserDocuments =  (token: ApiToken): Promise<AxiosResponse<ApiDocumentSuccessResponse>> => backendAPI.get('documents', {
+export const getUserDocuments =  (token: ApiToken, page: number): Promise<AxiosResponse<ApiDocumentSuccessResponse>> => backendAPI.get('documents?page=' + page, {
+    headers: {
+        Authorization: `Bearer ${token}`,
+    },
+});
+
+export const getDocumentsPagination = (token: ApiToken): Promise<AxiosResponse<ApiDocumentPaginationSuccessResponse>> => backendAPI.get('documents/documents-pagination', {
     headers: {
         Authorization: `Bearer ${token}`,
     },

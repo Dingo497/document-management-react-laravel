@@ -22,7 +22,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function() {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'getUser']);
-    Route::apiResource('documents', DocumentController::class);
+
+    Route::get('documents/documents-pagination', [DocumentController::class, 'getTotalUserDocumentsCount']);
     Route::get('documents/download/{filename}', [DocumentController::class, 'download']);
+    Route::apiResource('documents', DocumentController::class);
+
     Route::apiResource('tags', TagController::class);
 });

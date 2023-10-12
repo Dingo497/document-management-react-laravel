@@ -23,6 +23,7 @@ export type Document = {
 }
 export type Documents = {
     documents: Document[]
+    documentsPagination?: number | null
 }
 export type NewDocumentType = {
     name: string | null;
@@ -36,6 +37,11 @@ export type EditDocumentType = {
 export type ApiDocumentSuccessResponse = ApiStatusResponse & ApiToken & {
     data: {
         documents: Document[],
+    }
+}
+export type ApiDocumentPaginationSuccessResponse = ApiStatusResponse & ApiToken & {
+    data: {
+        documentsPagination: number,
     }
 }
 export type ApiCreateDocumentSuccessResponse = ApiStatusResponse & ApiToken & {

@@ -9,6 +9,7 @@ import { AppStateTypes, Document } from "../redux/constants/appStateTypes";
 import Header from "../components/Header";
 import Table from "../components/Table";
 import TagList from "../components/TagList";
+import PaginationDocuments from "../components/PaginationDocuments";
 
 
 export default function Dashboard() {
@@ -35,7 +36,6 @@ export default function Dashboard() {
 
     // @ts-ignore
     const handleChangeCheckbox = async (e) => {
-        console.log(e.target.checked);
         if (e.target.checked) {
             filterDocuments(e.target.value, 'add');
         } else {
@@ -84,6 +84,9 @@ export default function Dashboard() {
             </div>
             <div className='container'>
                 <Table documents={filteredDocuments} />
+            </div>
+            <div className="container">
+                <PaginationDocuments />
             </div>
         </>
     );

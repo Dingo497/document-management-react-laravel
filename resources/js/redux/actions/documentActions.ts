@@ -1,14 +1,34 @@
 import { ActionTypes } from "../constants/actionTypes";
 import {ApiToken} from "../../types/auth/authTypes";
-import {createUserDocument, editUserDocument, getUserDocuments, removeUserDocument} from "../../http/documentApi";
+import {
+    createUserDocument,
+    editUserDocument,
+    getDocumentsPagination,
+    getUserDocuments,
+    removeUserDocument
+} from "../../http/documentApi";
 import {Document, EditDocumentType, NewDocumentType} from "../constants/appStateTypes";
 
-export const getUserDocumentsAction = (token: ApiToken) => {
+export const getUserDocumentsAction = (token: ApiToken, page: number = 1) => {
     return async (dispatch) => {
         try {
-            const { data } = await getUserDocuments(token);
+            const { data } = await getUserDocuments(token, page);
             if (data.status === 'success' && data.data.documents.length > 0) {
                 return dispatch(setUserDocumentsAction(data.data.documents));
+            }
+        } catch (error) {
+            // nedokoncene zobrazenie chyby
+            return console.log(error.response.data);
+        }
+    }
+}
+
+export const getDocumentsPaginationAction = (token: ApiToken) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await getDocumentsPagination(token);
+            if (data.status === 'success' && data.data.documentsPagination > 0) {
+                return dispatch(setDocumentsPagination(data.data.documentsPagination));
             }
         } catch (error) {
             // nedokoncene zobrazenie chyby
@@ -47,6 +67,13 @@ export const setUserDocumentsAction = (document: NewDocumentType | Document[]) =
     return {
         type: ActionTypes.SET_DOCUMENTS,
         documents: document
+    };
+}
+
+export const setDocumentsPagination = (documentsPagination: number) => {
+    return {
+        type: ActionTypes.SET_DOCUMENTS_PAGINATION,
+        documentsPagination: documentsPagination
     };
 }
 

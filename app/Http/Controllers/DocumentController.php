@@ -7,15 +7,39 @@ use App\Models\Document;
 use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller {
+    private int $perPage = 10;
 
-    public function index(): jsonResponse {
+    /**
+     * Ziskanie poctu stranok urcene pre zobrazenie strankovanie
+     * @return JsonResponse
+     */
+    public function getTotalUserDocumentsCount(): jsonResponse {
         $user = Auth::user();
-        $userDocumentsWithTags = $user->documents()->with('tags')->get();
+        $totalUserDocumentsCount = $user->documents()->count();
+        $paginationCount = ceil($totalUserDocumentsCount / $this->perPage);
 
+        return response()->json([
+            'status' => 'success',
+            'data' => [
+                'documentsPagination' => $paginationCount,
+            ],
+        ]);
+    }
+
+    public function index(Request $request): jsonResponse {
+        $page = $request->input('page', 1);
+        $skip = ($page - 1) * $this->perPage;
+        $user = Auth::user();
+        $userDocumentsWithTags = $user->documents()
+                                      ->with('tags')
+                                      ->skip($skip)
+                                      ->take($this->perPage)
+                                      ->get();
 
         return response()->json([
             'status' => 'success',
