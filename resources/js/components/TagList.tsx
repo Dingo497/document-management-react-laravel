@@ -14,7 +14,7 @@ export default function TagList(props: {tags: TagType[], checkedTags: number[]|n
                         value={tag.id}
                         // @ts-ignore includes nemozna ci co...
                         checked={checkedTags?.includes(tag.id)}
-                        onChange={(e) => onChangeCheckbox(e.target.value, e.target.checked)}
+                        onChange={(e) => onChangeCheckbox(e.target.value, e.target.checked, e)}
                     />
                     <label>{tag.name}</label>
                 </div>

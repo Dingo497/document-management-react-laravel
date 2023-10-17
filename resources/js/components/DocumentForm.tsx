@@ -42,18 +42,18 @@ export default function DocumentForm(props: {editDocument :Document|null}) {
         }
     }, []);
 
-    const handleChangeCheckbox = (e) => {
-        if (e.target.checked) {
+    const handleChangeCheckbox = (value, checked, e) => {
+        if (checked) {
             setStringTags([...stringTags, e.target.nextElementSibling.innerText]);
             setFormData(prevFormData => ({
                 ...prevFormData,
-                tags: [...formData.tags, parseInt(e.target.value)]
+                tags: [...formData.tags, parseInt(value)]
             }));
         } else {
             setStringTags(stringTags.filter(tag => tag !== e.target.nextElementSibling.innerText));
             setFormData(prevFormData => ({
                 ...prevFormData,
-                tags: formData.tags.filter(tagID => tagID !== parseInt(e.target.value))
+                tags: formData.tags.filter(tagID => tagID !== parseInt(value))
             }));
         }
     }

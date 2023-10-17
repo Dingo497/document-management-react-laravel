@@ -49,8 +49,7 @@ export default function Dashboard() {
         }
     }, [documents]);
 
-    // @ts-ignore
-    const handleChangeCheckbox = async (value, checked) => {
+    const handleChangeCheckbox = (value, checked) => {
         if (checked) {
             filterDocuments(value, 'add');
         } else {
