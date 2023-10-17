@@ -84,6 +84,9 @@ export default function DocumentForm(props: {editDocument ?:Document|null}) {
             if (editDocument) {
                 // lebo pre edit to nieje povinne potom prepisat
                 editCurrentDocument();
+            } else {
+                // Len kvoli vypisaniu chyby, kedze nemam cas na upravu Alert komponentu...
+                createNewDocument();
             }
         }
     }

@@ -21,15 +21,14 @@ const documentReducer = (state = DocumentsInitialState, action: any) => {
         case ActionTypes.EDIT_DOCUMENT:
             const updatedDocument = action.updatedDocument;
             // @ts-ignore
-            const documentIndex = state.documents.findIndex(doc => doc.id === updatedDocument.id);
-            const documents = [...state.documents];
+            const documentIndex = state.documents.findIndex(doc => doc.id === updatedDocument[0].id);
             if (documentIndex !== -1) {
-                documents[documentIndex] = updatedDocument;
+                return {
+                    ...state,
+                    documents: updatedDocument
+                };
             }
-            return {
-                ...state,
-                documents: documents
-            };
+            break;
         case ActionTypes.LOGOUT_DOCUMENTS:
             return DocumentsInitialState;
         default:
