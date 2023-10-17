@@ -2,8 +2,7 @@
 @import '../mixins';
 
 .document-form {
-    width: 100%;
-    max-width: 600px;
+    width: 600px;
     border-collapse: collapse;
     @include container();
     overflow: hidden;

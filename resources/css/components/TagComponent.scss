@@ -3,6 +3,6 @@
 
 .tag {
     @include btn($background: $success, $opacity: 1);
-    max-width: 120px;
+    max-width: 90px;
     text-align: center;
 }

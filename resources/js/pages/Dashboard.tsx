@@ -1,4 +1,3 @@
-import '../../css/pages/Dashboard.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";

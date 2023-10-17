@@ -19,7 +19,7 @@ export default function TableRow(props: {documentID: string, name: string, tags:
                     ))}
                 </div>
             </td>
-            <td>
+            <td className='action-buttons'>
                 <ActionButton documentID={documentID} type='edit'/>
                 <ActionButton documentID={documentID} type='download'/>
                 <ActionButton documentID={documentID} type='remove'/>

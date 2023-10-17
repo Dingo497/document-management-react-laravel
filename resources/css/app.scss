@@ -12,3 +12,16 @@ body {
 .container {
     margin: 0 30px;
 }
+
+@import './pages/Dashboard';
+@import './pages/DocumentCreateEdit';
+@import './pages/RegisterLogin';
+@import './components/PaginationDocumentsComponent';
+@import './components/ActionButtonComponent';
+@import './components/AlertComponent';
+@import './components/DocumentForm';
+@import './components/HeaderComponent';
+@import './components/TableComponent';
+@import './components/TagComponent';
+@import './components/TagListComponent';
+@import './app-responsive';

@@ -4,7 +4,8 @@
 .pagination {
     display: flex;
     justify-content: center;
-    margin-top: -80px;
+    position: relative;
+    bottom: 50px;
 
     li {
         a {

@@ -1,4 +1,3 @@
-import '../../css/pages/RegisterLogin.scss';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerAction } from "../redux/actions/authActions";

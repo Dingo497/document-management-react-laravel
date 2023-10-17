@@ -1,4 +1,3 @@
-import '../../css/components/TagListComponent.scss';
 import {TagType} from "../redux/constants/appStateTypes";
 
 export default function TagList(props: {tags: TagType[], checkedTags: number[]|null, onChangeCheckbox}) {

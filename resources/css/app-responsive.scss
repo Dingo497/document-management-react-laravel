@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import './variables';
+@import './mixins';
+
+$large: 1400px;
+$medium: 1000px;
+$medium-small: 700px;
+$small: 500px;
+
+@media screen and (max-width: $large) {
+    .pagination {
+        bottom: 40px;
+    }
+
+    .filter-container {
+        top: 55px;
+    }
+}
+
+
+@media screen and (max-width: $medium) {
+    .pagination {
+        bottom: 15px;
+    }
+
+    table {
+        td:last-child {
+            margin: 5px 0;
+            display: block;
+            position: relative;
+        }
+        .action-button {
+            margin: 5px 0;
+            position: relative;
+            left: 50px;
+        }
+    }
+
+    .create-new-document {
+        top: 20px;
+    }
+
+    .document-form-title {
+        top: 20px;
+    }
+}
+
+
+@media screen and (max-width: $medium-small) {
+    .pagination {
+        bottom: 10px;
+    }
+
+    .filter-container {
+        top: 40px;
+    }
+
+    .create-new-document {
+        top: 30px;
+    }
+
+    .document-form {
+        width: 420px;
+    }
+}
+
+
+@media screen and (max-width: $small) {
+    .document-form {
+        width: 350px;
+    }
+}

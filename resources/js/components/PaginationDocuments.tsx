@@ -1,4 +1,3 @@
-import '../../css/components/PaginationDocumentsComponent.scss';
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateTypes} from "../redux/constants/appStateTypes";

@@ -1,4 +1,3 @@
-import '../../css/components/HeaderComponent.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateTypes} from "../redux/constants/appStateTypes";
 import {logoutAction} from "../redux/actions/authActions";

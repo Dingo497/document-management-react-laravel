@@ -1,4 +1,3 @@
-import '../../css/components/TableComponent.scss';
 import {Document} from "../redux/constants/appStateTypes";
 import TableRow from "./TableRow";
 

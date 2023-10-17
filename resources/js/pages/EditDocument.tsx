@@ -1,4 +1,3 @@
-import '../../css/pages/DocumentCreateEdit.scss';
 import DocumentForm from "../components/DocumentForm";
 import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";

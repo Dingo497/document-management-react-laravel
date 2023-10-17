@@ -1,4 +1,3 @@
-import '../../css/pages/DocumentCreateEdit.scss';
 import DocumentForm from "../components/DocumentForm";
 
 export default function CreateDocument() {

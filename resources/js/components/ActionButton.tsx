@@ -1,4 +1,3 @@
-import '../../css/components/ActionButtonComponent.scss';
 import { ButtonProps } from "../types/components/ActionButton";
 import {AiOutlineDownload, AiOutlineEdit, AiOutlineDelete} from "react-icons/ai";
 import {useNavigate} from "react-router-dom";

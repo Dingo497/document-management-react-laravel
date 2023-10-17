@@ -1,4 +1,3 @@
-import '../../css/components/AlertComponent.scss';
 import {AiOutlineClose} from "react-icons/ai";
 import {useEffect, useState} from "react";
 
