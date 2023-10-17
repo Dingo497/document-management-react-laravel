@@ -25,9 +25,18 @@ export default function Dashboard() {
 
     useEffect(() => {
         // @ts-ignore
-        dispatch(getUserDocumentsAction(token));
+        if (!documents[0].id) {
+            // @ts-ignore
+            dispatch(getUserDocumentsAction(token));
+        }
         // @ts-ignore
         dispatch(getUserTagsAction(token));
+
+        // Nastavenie filtrov po obnoveni stranky
+        const selectedTags = JSON.parse(localStorage.getItem('selectedTags'));
+        if (selectedTags) {
+            selectedTags.forEach(tag => handleChangeCheckbox(tag, true));
+        }
     }, []);
 
     useEffect(() => {
@@ -35,26 +44,40 @@ export default function Dashboard() {
     }, [documents]);
 
     // @ts-ignore
-    const handleChangeCheckbox = async (e) => {
-        if (e.target.checked) {
-            filterDocuments(e.target.value, 'add');
+    const handleChangeCheckbox = async (value, checked) => {
+        if (checked) {
+            filterDocuments(value, 'add');
         } else {
-            filterDocuments(e.target.value, 'remove');
+            filterDocuments(value, 'remove');
         }
     }
 
     // @ts-ignore
     const filterDocuments = async (value: string, type: 'add'|'remove') => {
+        const localStorageSelectedTags = JSON.parse(localStorage.getItem('selectedTags'));
         let updatedTagsToFilter;
+
+        let mergedTagsToFilter = tagsToFilter;
+        if (localStorageSelectedTags) {
+            mergedTagsToFilter = [...tagsToFilter, ...localStorageSelectedTags];
+        }
+
+        // Pridanie alebo odobratie filtra
         if (type === 'add') {
             updatedTagsToFilter = [
-                ...tagsToFilter,
+                ...mergedTagsToFilter,
                 parseInt(value)
             ];
         } else {
-            // @ts-ignore
-            updatedTagsToFilter = tagsToFilter.filter((tagId) => tagId !== parseInt(value));
+            updatedTagsToFilter = mergedTagsToFilter.filter((tagId) => tagId !== parseInt(value));
         }
+
+        // Vymazanie duplicitnych hodnot
+        // @ts-ignore
+        updatedTagsToFilter = Array.from(new Set(updatedTagsToFilter));
+
+        // Nastavenie local storage a state
+        localStorage.setItem('selectedTags', JSON.stringify(updatedTagsToFilter));
         await setTagsToFilter(updatedTagsToFilter);
 
         const filteredDocs = documents.filter((document) => {
@@ -78,7 +101,7 @@ export default function Dashboard() {
             <div className="filter-container">
                 <TagList
                     tags={tags}
-                    checkedTags={null} // TODO: tu vlozim to co sa ulozi po refreshi
+                    checkedTags={tagsToFilter}
                     onChangeCheckbox={handleChangeCheckbox}
                 />
             </div>

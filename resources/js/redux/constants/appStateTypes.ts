@@ -39,6 +39,12 @@ export type ApiDocumentSuccessResponse = ApiStatusResponse & ApiToken & {
         documents: Document[],
     }
 }
+export type ApiDocumentWithUserSuccessResponse = ApiStatusResponse & ApiToken & {
+    data: {
+        documents: Document[],
+        user: User
+    }
+}
 export type ApiDocumentPaginationSuccessResponse = ApiStatusResponse & ApiToken & {
     data: {
         documentsPagination: number,

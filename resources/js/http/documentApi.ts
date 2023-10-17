@@ -3,7 +3,7 @@ import {backendAPI} from "./index";
 import {ApiStatusResponse, ApiToken} from "../types/auth/authTypes";
 import {
     ApiCreateDocumentSuccessResponse, ApiDocumentPaginationSuccessResponse,
-    ApiDocumentSuccessResponse, ApiEditDocumentSuccessResponse, EditDocumentType,
+    ApiDocumentSuccessResponse, ApiDocumentWithUserSuccessResponse, ApiEditDocumentSuccessResponse, EditDocumentType,
     NewDocumentType
 } from "../redux/constants/appStateTypes";
 
@@ -12,6 +12,13 @@ export const getUserDocuments =  (token: ApiToken, page: number): Promise<AxiosR
         Authorization: `Bearer ${token}`,
     },
 });
+
+/**
+ * Ziskanie dokumentov patraice pouzivatelovi bez bearer token ale zato mam nastavene cookie.
+ * Pouziva sa ked sa spravi refresh stranky
+ * @param page
+ */
+export const getUserDocumentsAfterRefresh =  (page: number): Promise<AxiosResponse<ApiDocumentWithUserSuccessResponse>> => backendAPI.get('documents-cookie?page=' + page);
 
 export const getDocumentsPagination = (token: ApiToken): Promise<AxiosResponse<ApiDocumentPaginationSuccessResponse>> => backendAPI.get('documents/documents-pagination', {
     headers: {

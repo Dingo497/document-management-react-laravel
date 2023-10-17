@@ -30,6 +30,8 @@ const documentReducer = (state = DocumentsInitialState, action: any) => {
                 ...state,
                 documents: documents
             };
+        case ActionTypes.LOGOUT_DOCUMENTS:
+            return DocumentsInitialState;
         default:
             return state;
     }

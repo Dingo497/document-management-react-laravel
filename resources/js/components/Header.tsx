@@ -11,6 +11,7 @@ export default function Header() {
     const handleLogout = () => {
         // @ts-ignore
         dispatch(logoutAction(token));
+        localStorage.clear();
     }
 
     return (

@@ -4,16 +4,38 @@ import {
     createUserDocument,
     editUserDocument,
     getDocumentsPagination,
-    getUserDocuments,
+    getUserDocuments, getUserDocumentsAfterRefresh,
     removeUserDocument
 } from "../../http/documentApi";
 import {Document, EditDocumentType, NewDocumentType} from "../constants/appStateTypes";
+import { setUserAction } from './authActions';
 
 export const getUserDocumentsAction = (token: ApiToken, page: number = 1) => {
     return async (dispatch) => {
         try {
             const { data } = await getUserDocuments(token, page);
             if (data.status === 'success' && data.data.documents.length > 0) {
+                return dispatch(setUserDocumentsAction(data.data.documents));
+            }
+        } catch (error) {
+            // nedokoncene zobrazenie chyby
+            return console.log(error.response.data);
+        }
+    }
+}
+
+export const getUserDocumentsAfterRefreshAction = (page: number = 1) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await getUserDocumentsAfterRefresh(page);
+            if (
+                data.status === 'success'
+                &&
+                data.data.documents.length > 0
+                &&
+                data.token.length > 0
+            ) {
+                dispatch(setUserAction({user: data.data.user, token: data.token}));
                 return dispatch(setUserDocumentsAction(data.data.documents));
             }
         } catch (error) {
@@ -99,4 +121,10 @@ export const removeUserDocumentAction = (token: ApiToken, documentID: number) =>
             return console.log(error.response.data);
         }
     }
+}
+
+export const logoutDocumentsAction = () => {
+    return {
+        type: 'LOGOUT_DOCUMENTS',
+    };
 }

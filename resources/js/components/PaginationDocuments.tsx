@@ -48,8 +48,25 @@ export default function PaginationDocuments() {
         nextPageElement = document.getElementById('page-' + nextPage);
         nextPageElement.classList.add('active');
 
+        // Nastavenie aktualnej nastavenej dokument stranky - kvoli refresh webu
+        localStorage.setItem('pagination', JSON.stringify(nextPage));
+
         // @ts-ignore
         dispatch(getUserDocumentsAction(token, nextPage));
+    }
+
+    const setDefaultActiveElement = (i: number): string => {
+        let classActive = '';
+        const currentPagination = JSON.parse(localStorage.getItem('pagination'));
+
+        if (currentPagination) {
+            if (i === (currentPagination - 1)) {
+                classActive = 'active';
+            }
+        } else if (i === 0) {
+            classActive = 'active';
+        }
+        return classActive;
     }
 
     return (
@@ -65,7 +82,7 @@ export default function PaginationDocuments() {
                 <li key={i + 1}>
                     <a
                         id={'page-' + (i + 1)}
-                        className={i === 0 ? 'active' : ''}
+                        className={setDefaultActiveElement(i)}
                         onClick={handleChangePagination}
                     >
                         {i + 1}

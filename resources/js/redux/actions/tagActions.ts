@@ -21,3 +21,9 @@ export const setUserTagsAction = (tagData: any) => {
         tags: tagData
     };
 }
+
+export const logoutTagsAction = () => {
+    return {
+        type: 'LOGOUT_TAGS',
+    };
+}

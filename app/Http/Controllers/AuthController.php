@@ -6,6 +6,7 @@ use App\Http\Requests\AuthRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
@@ -42,13 +43,23 @@ class AuthController extends Controller
         $user = Auth::user();
         $token = $user->createToken('main')->plainTextToken;
 
+        $cookie = cookie(
+            'auth_token',
+            $token,
+            6 * 30,
+            null,
+            null,
+            false,
+            true
+        );
+
         return response()->json([
             'status' => 'success',
             'data' => [
                 'user' => $user,
             ],
             'token' => $token
-        ]);
+        ])->cookie($cookie);
     }
 
     /**
@@ -70,6 +81,9 @@ class AuthController extends Controller
     public function logout(): JsonResponse {
         $user = Auth::user();
         $user->tokens()->delete();
-        return response()->json(['status' => 'success']);
+
+        $cookie = Cookie::forget('auth_token');
+
+        return response()->json(['status' => 'success'])->withCookie($cookie);
     }
 }

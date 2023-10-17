@@ -9,7 +9,7 @@ const authReducer = (state = AuthInitialState, action: any) => {
                 user: action.user,
                 token: action.token,
             };
-        case ActionTypes.LOGOUT:
+        case ActionTypes.LOGOUT_USER:
             return {
                 user: null,
                 token: null,

@@ -6,6 +6,7 @@ use App\Http\Resources\DocumentResource;
 use App\Models\Document;
 use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,32 @@ class DocumentController extends Controller {
         ]);
     }
 
+    /**
+     * Sluzi na ziskanie dokumentov pre usera bez potreby byt prihlaseny ale potrebne je mat token v cookies.
+     * @param Request $request
+     * @return array|jsonResponse
+     * @throws \Exception
+     */
+    public function getDocumentsByCookieAuth(Request $request): array|jsonResponse {
+        $token = $request->cookie('auth_token');
+        $page = $request->input('page', 1);
+
+        if ($token) {
+            $internalRequest = Request::create('api/documents', 'GET', ['page' => $page], [], [], [
+                'HTTP_Authorization' => 'Bearer ' . $token]
+            );
+            $response = app()->handle($internalRequest); // Spracovanie poziadavky
+            $body = $response->getContent(); // Ziskanie tela odpovede
+
+            $responseData = json_decode($body, true);
+            $responseData['token'] = $token;
+
+            return response()->json($responseData);
+        }
+
+        return response()->json(['error' => 'Unauthenticated'], 401);
+    }
+
     public function index(Request $request): jsonResponse {
         $page = $request->input('page', 1);
         $skip = ($page - 1) * $this->perPage;
@@ -45,6 +72,7 @@ class DocumentController extends Controller {
             'status' => 'success',
             'data' => [
                 'documents' => DocumentResource::collection($userDocumentsWithTags),
+                'user' => $user,
             ],
         ]);
     }
