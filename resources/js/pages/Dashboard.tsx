@@ -23,6 +23,8 @@ export default function Dashboard() {
     const [filteredDocuments, setFilteredDocuments] = useState<Document[]>(documents);
     const [tagsToFilter, setTagsToFilter] = useState<number[]>([]);
 
+    const selectedTags = JSON.parse(localStorage.getItem('selectedTags'));
+
     useEffect(() => {
         // @ts-ignore
         if (!documents[0].id) {
@@ -33,7 +35,6 @@ export default function Dashboard() {
         dispatch(getUserTagsAction(token));
 
         // Nastavenie filtrov po obnoveni stranky
-        const selectedTags = JSON.parse(localStorage.getItem('selectedTags'));
         if (selectedTags) {
             selectedTags.forEach(tag => handleChangeCheckbox(tag, true));
         }
@@ -41,6 +42,11 @@ export default function Dashboard() {
 
     useEffect(() => {
         setFilteredDocuments(documents);
+
+        // Vzdy ked sa dokumnety zmenia tak znova nacitam filtre podla tagov, napriklad pri zmene strankovania
+        if (selectedTags) {
+            selectedTags.forEach(tag => handleChangeCheckbox(tag, true));
+        }
     }, [documents]);
 
     // @ts-ignore
