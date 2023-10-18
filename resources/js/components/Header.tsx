@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateTypes} from "../redux/constants/appStateTypes";
+import {AppStateTypes} from "../types/globalTypes";
 import {logoutAction} from "../redux/actions/authActions";
 
 export default function Header() {

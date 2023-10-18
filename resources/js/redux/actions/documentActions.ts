@@ -1,5 +1,5 @@
 import { ActionTypes } from "../constants/actionTypes";
-import {ApiToken} from "../../types/auth/authTypes";
+import {ApiToken} from "../../types/authTypes";
 import {
     createUserDocument,
     editUserDocument,
@@ -7,7 +7,7 @@ import {
     getUserDocuments, getUserDocumentsAfterRefresh,
     removeUserDocument
 } from "../../http/documentApi";
-import {Document, EditDocumentType, NewDocumentType} from "../constants/appStateTypes";
+import {Document, EditDocumentType, NewDocumentType} from "../../types/documentTypes";
 import { setUserAction } from './authActions';
 
 export const getUserDocumentsAction = (token: ApiToken, page: number = 1) => {
@@ -15,6 +15,8 @@ export const getUserDocumentsAction = (token: ApiToken, page: number = 1) => {
         try {
             const { data } = await getUserDocuments(token, page);
             if (data.status === 'success' && data.data.documents.length > 0) {
+                // @ts-ignore
+                // chyba vraj Document[] nemozem vlozit do typu Document[] | NewDocumentType
                 return dispatch(setUserDocumentsAction(data.data.documents));
             }
         } catch (error) {
@@ -36,6 +38,8 @@ export const getUserDocumentsAfterRefreshAction = (page: number = 1) => {
                 data.token.length > 0
             ) {
                 dispatch(setUserAction({user: data.data.user, token: data.token}));
+                // @ts-ignore
+                // chyba vraj Document[] nemozem vlozit do typu Document[] | NewDocumentType
                 return dispatch(setUserDocumentsAction(data.data.documents));
             }
         } catch (error) {

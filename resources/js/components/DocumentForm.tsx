@@ -1,9 +1,11 @@
 import {useDispatch, useSelector} from "react-redux";
-import {alertDataType, AppStateTypes, Document} from "../redux/constants/appStateTypes";
+import {AppStateTypes} from "../types/globalTypes";
+import {Document} from '../types/documentTypes';
+import {alertDataType} from '../types/globalTypes';
 import {createUserDocumentAction, editUserDocumentAction} from "../redux/actions/documentActions";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {documentFormDataType} from "../types/document/documentTypes";
+import {documentFormDataType} from "../types/documentTypes";
 
 import Alert from "./Alert";
 import TagList from "./TagList";

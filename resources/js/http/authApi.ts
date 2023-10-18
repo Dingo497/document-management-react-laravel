@@ -6,7 +6,7 @@ import {
     ApiStatusResponse, ApiToken,
     AuthLoginForm,
     AuthRegisterForm
-} from "../types/auth/authTypes";
+} from "../types/authTypes";
 
 export const register = (user: AuthRegisterForm): Promise<AxiosResponse<ApiAuthSuccessResponse>> => backendAPI.post('register', user);
 

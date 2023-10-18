@@ -1,11 +1,11 @@
 import {AxiosResponse} from "axios";
 import {backendAPI} from "./index";
-import {ApiStatusResponse, ApiToken} from "../types/auth/authTypes";
+import {ApiStatusResponse, ApiToken} from "../types/authTypes";
 import {
     ApiCreateDocumentSuccessResponse, ApiDocumentPaginationSuccessResponse,
-    ApiDocumentSuccessResponse, ApiDocumentWithUserSuccessResponse, ApiEditDocumentSuccessResponse, EditDocumentType,
-    NewDocumentType
-} from "../redux/constants/appStateTypes";
+    ApiDocumentSuccessResponse, ApiDocumentWithUserSuccessResponse, ApiEditDocumentSuccessResponse
+} from "../types/documentTypes";
+import {EditDocumentType, NewDocumentType} from "../types/documentTypes";
 
 export const getUserDocuments =  (token: ApiToken, page: number): Promise<AxiosResponse<ApiDocumentSuccessResponse>> => backendAPI.get('documents?page=' + page, {
     headers: {

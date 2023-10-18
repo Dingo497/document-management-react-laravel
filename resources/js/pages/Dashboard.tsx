@@ -3,7 +3,8 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getUserDocumentsAction} from "../redux/actions/documentActions";
 import {getUserTagsAction} from "../redux/actions/tagActions";
-import { AppStateTypes, Document } from "../redux/constants/appStateTypes";
+import { AppStateTypes } from "../redux/constants/appStateTypes";
+import {Document} from '../types/documentTypes';
 
 import Header from "../components/Header";
 import Table from "../components/Table";

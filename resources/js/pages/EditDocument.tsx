@@ -1,7 +1,7 @@
 import DocumentForm from "../components/DocumentForm";
 import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {AppStateTypes} from "../redux/constants/appStateTypes";
+import {AppStateTypes} from "../types/globalTypes";
 
 export default function EditDocument() {
     const { documentID } = useParams();

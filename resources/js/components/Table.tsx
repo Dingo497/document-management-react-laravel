@@ -1,4 +1,4 @@
-import {Document} from "../redux/constants/appStateTypes";
+import {Document} from "../types/documentTypes";
 import TableRow from "./TableRow";
 
 export default function Table(props: {documents: Document[]}) {

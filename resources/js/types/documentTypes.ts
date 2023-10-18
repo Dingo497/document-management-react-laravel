@@ -1,20 +1,11 @@
-import {ApiStatusResponse, ApiToken, User} from "../../types/auth/authTypes";
+import {TagType} from "./globalTypes";
+import {ApiStatusResponse, ApiToken, User} from "./authTypes";
 
-// Stav celej aplikacie
-export type AppStateTypes = {
-    auth: InitialStateAuthType,
-    tag: TagsType,
-    document: Documents
+export type documentFormDataType = {
+    name: string,
+    tags: number[],
+    image: File | null
 }
-
-export type TagType = {
-    id: string | null;
-    name: string | null;
-}
-export type TagsType = {
-    tags: TagType[]
-}
-
 export type Document = {
     id: string | null;
     name: string | null;
@@ -34,6 +25,9 @@ export type EditDocumentType = {
     name: string;
     tags: number[];
 }
+
+
+//------------------------------API----------------------------------
 export type ApiDocumentSuccessResponse = ApiStatusResponse & ApiToken & {
     data: {
         documents: Document[],
@@ -60,16 +54,3 @@ export type ApiEditDocumentSuccessResponse = ApiStatusResponse & ApiToken & {
         documents: EditDocumentType,
     }
 }
-
-export type alertDataType = {
-    type: 'danger' | 'success',
-    title: string,
-    messages: [],
-}
-
-// Stav Auth casti aplikacie
-export type InitialStateAuthType = {
-    user: User | null;
-    token: string | null;
-}
-

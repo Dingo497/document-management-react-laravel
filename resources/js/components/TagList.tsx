@@ -1,4 +1,4 @@
-import {TagType} from "../redux/constants/appStateTypes";
+import {TagType} from "../types/globalTypes";
 
 export default function TagList(props: {tags: TagType[], checkedTags: number[]|null, onChangeCheckbox}) {
     const {tags, checkedTags, onChangeCheckbox} = props;

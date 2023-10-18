@@ -1,6 +1,6 @@
 import { ActionTypes } from "../constants/actionTypes";
 import { login, logout, register } from "../../http/authApi";
-import { ApiToken, AuthLoginForm, AuthRegisterForm, setUserActionType } from "../../types/auth/authTypes";
+import { ApiToken, AuthLoginForm, AuthRegisterForm, setUserActionType } from "../../types/authTypes";
 import {logoutDocumentsAction} from './documentActions';
 import {logoutTagsAction} from './tagActions';
 
