@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateTypes} from "../types/globalTypes";
-import {Document} from '../types/documentTypes';
+import {DocumentType} from '../types/documentTypes';
 import {alertDataType} from '../types/globalTypes';
 import {createUserDocumentAction, editUserDocumentAction} from "../redux/actions/documentActions";
 import {useEffect, useState} from "react";
@@ -11,7 +11,7 @@ import Alert from "./Alert";
 import TagList from "./TagList";
 
 
-export default function DocumentForm(props: {editDocument ?:Document|null}) {
+export default function DocumentForm(props: {editDocument ?:DocumentType|null}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

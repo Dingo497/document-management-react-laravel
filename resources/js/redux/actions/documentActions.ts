@@ -1,5 +1,5 @@
 import { ActionTypes } from "../constants/actionTypes";
-import {ApiToken} from "../../types/authTypes";
+import {ApiTokenType} from "../../types/authTypes";
 import {
     createUserDocument,
     editUserDocument,
@@ -7,16 +7,16 @@ import {
     getUserDocuments, getUserDocumentsAfterRefresh,
     removeUserDocument
 } from "../../http/documentApi";
-import {Document, EditDocumentType, NewDocumentType} from "../../types/documentTypes";
+import {DocumentType, EditDocumentType, NewDocumentType} from "../../types/documentTypes";
 import { setUserAction } from './authActions';
 
-export const getUserDocumentsAction = (token: ApiToken, page: number = 1) => {
+export const getUserDocumentsAction = (token: ApiTokenType, page: number = 1) => {
     return async (dispatch) => {
         try {
             const { data } = await getUserDocuments(token, page);
             if (data.status === 'success' && data.data.documents.length > 0) {
                 // @ts-ignore
-                // chyba vraj Document[] nemozem vlozit do typu Document[] | NewDocumentType
+                // chyba vraj DocumentType[] nemozem vlozit do typu DocumentType[] | NewDocumentType
                 return dispatch(setUserDocumentsAction(data.data.documents));
             }
         } catch (error) {
@@ -39,7 +39,7 @@ export const getUserDocumentsAfterRefreshAction = (page: number = 1) => {
             ) {
                 dispatch(setUserAction({user: data.data.user, token: data.token}));
                 // @ts-ignore
-                // chyba vraj Document[] nemozem vlozit do typu Document[] | NewDocumentType
+                // chyba vraj DocumentType[] nemozem vlozit do typu DocumentType[] | NewDocumentType
                 return dispatch(setUserDocumentsAction(data.data.documents));
             }
         } catch (error) {
@@ -49,7 +49,7 @@ export const getUserDocumentsAfterRefreshAction = (page: number = 1) => {
     }
 }
 
-export const getDocumentsPaginationAction = (token: ApiToken) => {
+export const getDocumentsPaginationAction = (token: ApiTokenType) => {
     return async (dispatch) => {
         try {
             const { data } = await getDocumentsPagination(token);
@@ -63,7 +63,7 @@ export const getDocumentsPaginationAction = (token: ApiToken) => {
     }
 }
 
-export const createUserDocumentAction = (token: ApiToken, documents: NewDocumentType) => {
+export const createUserDocumentAction = (token: ApiTokenType, documents: NewDocumentType) => {
     return async (dispatch) => {
         try {
             const { data } = await createUserDocument(token, documents);
@@ -76,7 +76,7 @@ export const createUserDocumentAction = (token: ApiToken, documents: NewDocument
     }
 }
 
-export const editUserDocumentAction = (token: ApiToken, documents/*: EditDocumentType*/) => {
+export const editUserDocumentAction = (token: ApiTokenType, documents: EditDocumentType) => {
     return async (dispatch) => {
         try {
             const { data } = await editUserDocument(token, documents);
@@ -89,7 +89,7 @@ export const editUserDocumentAction = (token: ApiToken, documents/*: EditDocumen
     }
 }
 
-export const setUserDocumentsAction = (document: NewDocumentType | Document[]) => {
+export const setUserDocumentsAction = (document: NewDocumentType | DocumentType[]) => {
     return {
         type: ActionTypes.SET_DOCUMENTS,
         documents: document
@@ -110,7 +110,7 @@ export const editUserDocumentsAction = (updatedDocument: EditDocumentType) => {
     };
 }
 
-export const removeUserDocumentAction = (token: ApiToken, documentID: number) => {
+export const removeUserDocumentAction = (token: ApiTokenType, documentID: number) => {
     return async (dispatch) => {
         try {
             const { data } = await removeUserDocument(token, documentID);

@@ -1,19 +1,19 @@
 import {TagType} from "./globalTypes";
-import {ApiStatusResponse, ApiToken, User} from "./authTypes";
+import {ApiStatusResponseType, ApiTokenType, UserType} from "./authTypes";
 
 export type documentFormDataType = {
     name: string,
     tags: number[],
     image: File | null
 }
-export type Document = {
+export type DocumentType = {
     id: string | null;
     name: string | null;
     image: string | null;
     tags: TagType[]
 }
-export type Documents = {
-    documents: Document[]
+export type DocumentsType = {
+    documents: DocumentType[]
     documentsPagination?: number | null
 }
 export type NewDocumentType = {
@@ -28,28 +28,28 @@ export type EditDocumentType = {
 
 
 //------------------------------API----------------------------------
-export type ApiDocumentSuccessResponse = ApiStatusResponse & ApiToken & {
+export type ApiDocumentSuccessResponseType = ApiStatusResponseType & ApiTokenType & {
     data: {
-        documents: Document[],
+        documents: DocumentType[],
     }
 }
-export type ApiDocumentWithUserSuccessResponse = ApiStatusResponse & ApiToken & {
+export type ApiDocumentWithUserSuccessResponseType = ApiStatusResponseType & ApiTokenType & {
     data: {
-        documents: Document[],
-        user: User
+        documents: DocumentType[],
+        user: UserType
     }
 }
-export type ApiDocumentPaginationSuccessResponse = ApiStatusResponse & ApiToken & {
+export type ApiDocumentPaginationSuccessResponseType = ApiStatusResponseType & ApiTokenType & {
     data: {
         documentsPagination: number,
     }
 }
-export type ApiCreateDocumentSuccessResponse = ApiStatusResponse & ApiToken & {
+export type ApiCreateDocumentSuccessResponseType = ApiStatusResponseType & ApiTokenType & {
     data: {
         documents: NewDocumentType,
     }
 }
-export type ApiEditDocumentSuccessResponse = ApiStatusResponse & ApiToken & {
+export type ApiEditDocumentSuccessResponseType = ApiStatusResponseType & ApiTokenType & {
     data: {
         documents: EditDocumentType,
     }

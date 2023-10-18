@@ -1,4 +1,4 @@
-import { ButtonProps } from "../types/globalTypes";
+import { ButtonPropsType } from "../types/globalTypes";
 import {AiOutlineDownload, AiOutlineEdit, AiOutlineDelete} from "react-icons/ai";
 import {useNavigate} from "react-router-dom";
 import {downloadUserDocument} from "../http/documentApi";
@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStateTypes} from "../types/globalTypes";
 import {getDocumentsPaginationAction, removeUserDocumentAction} from "../redux/actions/documentActions";
 
-export default function ActionButton({documentID, type}: ButtonProps) {
+export default function ActionButton({documentID, type}: ButtonPropsType) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 

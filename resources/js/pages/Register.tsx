@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerAction } from "../redux/actions/authActions";
 import {Link, useNavigate} from "react-router-dom";
-import { AuthRegisterForm } from "../types/authTypes";
+import { AuthRegisterFormType } from "../types/authTypes";
 import Alert from "../components/Alert";
 import {alertDataType} from '../types/globalTypes';
 
@@ -10,7 +10,7 @@ export default function Register() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [registerForm, setRegisterForm] = useState<AuthRegisterForm>({
+    const [registerForm, setRegisterForm] = useState<AuthRegisterFormType>({
         name: '',
         email: '',
         password: '',

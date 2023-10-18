@@ -1,10 +1,10 @@
 import { ActionTypes } from "../constants/actionTypes";
 import { login, logout, register } from "../../http/authApi";
-import { ApiToken, AuthLoginForm, AuthRegisterForm, setUserActionType } from "../../types/authTypes";
+import { ApiTokenType, AuthLoginFormType, AuthRegisterFormType, setUserActionType } from "../../types/authTypes";
 import {logoutDocumentsAction} from './documentActions';
 import {logoutTagsAction} from './tagActions';
 
-export const registerAction = (userData: AuthRegisterForm) => {
+export const registerAction = (userData: AuthRegisterFormType) => {
     return async (dispatch) => {
         try {
             const { data } = await register(userData);
@@ -20,7 +20,7 @@ export const registerAction = (userData: AuthRegisterForm) => {
     }
 }
 
-export const loginAction = (userData: AuthLoginForm) => {
+export const loginAction = (userData: AuthLoginFormType) => {
     return async (dispatch) => {
         try {
             const { data } = await login(userData);
@@ -36,7 +36,7 @@ export const loginAction = (userData: AuthLoginForm) => {
     }
 }
 
-export const logoutAction = (token: ApiToken) => {
+export const logoutAction = (token: ApiTokenType) => {
     return async (dispatch) => {
         try {
             await logout(token);

@@ -1,7 +1,7 @@
-import {Document} from "../types/documentTypes";
+import {DocumentType} from "../types/documentTypes";
 import TableRow from "./TableRow";
 
-export default function Table(props: {documents: Document[]}) {
+export default function Table(props: {documents: DocumentType[]}) {
     const {documents} = props;
 
     return (
@@ -14,7 +14,7 @@ export default function Table(props: {documents: Document[]}) {
                 </tr>
             </thead>
             <tbody>
-            {documents?.map((document: Document) => (
+            {documents?.map((document: DocumentType) => (
                 <TableRow
                     key={ document.id }
                     documentID={ document.id }

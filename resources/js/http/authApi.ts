@@ -1,24 +1,24 @@
 import { AxiosResponse } from 'axios';
 import { backendAPI } from './index';
 import {
-    ApiAuthSuccessResponse,
-    ApiGetUserResponse,
-    ApiStatusResponse, ApiToken,
-    AuthLoginForm,
-    AuthRegisterForm
+    ApiAuthSuccessResponseType,
+    ApiGetUserResponseType,
+    ApiStatusResponseType, ApiTokenType,
+    AuthLoginFormType,
+    AuthRegisterFormType
 } from "../types/authTypes";
 
-export const register = (user: AuthRegisterForm): Promise<AxiosResponse<ApiAuthSuccessResponse>> => backendAPI.post('register', user);
+export const register = (user: AuthRegisterFormType): Promise<AxiosResponse<ApiAuthSuccessResponseType>> => backendAPI.post('register', user);
 
-export const login = (user: AuthLoginForm): Promise<AxiosResponse<ApiAuthSuccessResponse>> => backendAPI.post('login', user);
+export const login = (user: AuthLoginFormType): Promise<AxiosResponse<ApiAuthSuccessResponseType>> => backendAPI.post('login', user);
 
-export const logout = (token: ApiToken): Promise<AxiosResponse<ApiStatusResponse>> => backendAPI.post('logout', {}, {
+export const logout = (token: ApiTokenType): Promise<AxiosResponse<ApiStatusResponseType>> => backendAPI.post('logout', {}, {
     headers: {
         Authorization: `Bearer ${token}`,
     },
 });
 
-export const getUser = (token: string): Promise<AxiosResponse<ApiGetUserResponse>> => backendAPI.get('user', {
+export const getUser = (token: string): Promise<AxiosResponse<ApiGetUserResponseType>> => backendAPI.get('user', {
     headers: {
         Authorization: `Bearer ${token}`,
     },

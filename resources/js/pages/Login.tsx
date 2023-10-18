@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {Link, useNavigate} from 'react-router-dom';
 import { loginAction } from "../redux/actions/authActions";
-import { AuthLoginForm } from "../types/authTypes";
+import { AuthLoginFormType } from "../types/authTypes";
 import Alert from "../components/Alert";
 import {alertDataType} from '../types/globalTypes';
 
@@ -10,7 +10,7 @@ export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [loginForm, setLoginForm] = useState<AuthLoginForm>({
+    const [loginForm, setLoginForm] = useState<AuthLoginFormType>({
         email: '',
         password: '',
     });

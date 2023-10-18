@@ -1,14 +1,14 @@
 import {InitialStateAuthType} from "./authTypes";
-import {Documents} from "./documentTypes";
+import {DocumentsType} from "./documentTypes";
 
 // Stav celej aplikacie
 export type AppStateTypes = {
     auth: InitialStateAuthType,
     tag: TagsType,
-    document: Documents
+    document: DocumentsType
 }
 
-export type ButtonProps = {
+export type ButtonPropsType = {
     documentID: string;
     type: 'edit' | 'download' | 'remove';
 }

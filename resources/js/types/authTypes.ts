@@ -1,10 +1,10 @@
 // Stav Auth casti aplikacie
 export type InitialStateAuthType = {
-    user: User | null;
+    user: UserType | null;
     token: string | null;
 }
 
-export type User = {
+export type UserType = {
     id: number;
     name: string;
     email: string;
@@ -12,19 +12,19 @@ export type User = {
 }
 // Sluzi na typovanie redux action setUserAction
 export type setUserActionType = {
-    user: User;
+    user: UserType;
     token: string;
 }
 
 
 // -----------------------------Formulare---------------------------
 // Sluzi na spracovanie formulara
-export type AuthLoginForm = {
+export type AuthLoginFormType = {
     email: string;
     password: string;
 }
 // Sluzi na spracovanie register formulara
-export type AuthRegisterForm = AuthLoginForm & {
+export type AuthRegisterFormType = AuthLoginFormType & {
     name: string;
     password: string;
     password_confirmation: string;
@@ -33,20 +33,20 @@ export type AuthRegisterForm = AuthLoginForm & {
 
 // -----------------------------API-----------------------------------
 // Ziskanie statusu uspesneho requestu alebo nie
-export type ApiStatusResponse = {
+export type ApiStatusResponseType = {
     status: 'success' | 'error';
     message?: string;
 }
-export type ApiToken = {
+export type ApiTokenType = {
     token: string;
 }
-export type ApiAuthSuccessResponse = ApiStatusResponse & ApiToken & {
+export type ApiAuthSuccessResponseType = ApiStatusResponseType & ApiTokenType & {
     data: {
-        user: User,
+        user: UserType,
     }
 }
-export type ApiGetUserResponse = ApiStatusResponse & {
+export type ApiGetUserResponseType = ApiStatusResponseType & {
     data: {
-        user: User,
+        user: UserType,
     }
 }

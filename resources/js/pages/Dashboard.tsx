@@ -3,8 +3,8 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getUserDocumentsAction} from "../redux/actions/documentActions";
 import {getUserTagsAction} from "../redux/actions/tagActions";
-import { AppStateTypes } from "../redux/constants/appStateTypes";
-import {Document} from '../types/documentTypes';
+import { AppStateTypes } from "../types/globalTypes";
+import {DocumentType} from '../types/documentTypes';
 
 import Header from "../components/Header";
 import Table from "../components/Table";
@@ -20,7 +20,7 @@ export default function Dashboard() {
     const tags = useSelector((state: AppStateTypes) => state.tag.tags);
     const documents = useSelector((state: AppStateTypes) => state.document.documents);
 
-    const [filteredDocuments, setFilteredDocuments] = useState<Document[]>(documents);
+    const [filteredDocuments, setFilteredDocuments] = useState<DocumentType[]>(documents);
     const [tagsToFilter, setTagsToFilter] = useState<number[]>([]);
 
     const selectedTags = JSON.parse(localStorage.getItem('selectedTags'));

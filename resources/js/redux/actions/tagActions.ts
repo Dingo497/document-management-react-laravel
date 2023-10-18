@@ -1,7 +1,7 @@
 import { ActionTypes } from "../constants/actionTypes";
 import {getUserTags} from "../../http/tagApi";
-import {ApiToken} from "../../types/authTypes";
-export const getUserTagsAction = (token: ApiToken) => {
+import {ApiTokenType} from "../../types/authTypes";
+export const getUserTagsAction = (token: ApiTokenType) => {
     return async (dispatch) => {
         try {
             const { data } = await getUserTags(token);
