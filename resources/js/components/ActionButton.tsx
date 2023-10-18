@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {downloadUserDocument} from "../http/documentApi";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateTypes} from "../types/globalTypes";
-import {removeUserDocumentAction} from "../redux/actions/documentActions";
+import {getDocumentsPaginationAction, removeUserDocumentAction} from "../redux/actions/documentActions";
 
 export default function ActionButton({documentID, type}: ButtonProps) {
     const navigate = useNavigate();
@@ -55,6 +55,8 @@ export default function ActionButton({documentID, type}: ButtonProps) {
     const handleRemoveDocument = () => {
         // @ts-ignore
         dispatch(removeUserDocumentAction(token, documentID));
+        // @ts-ignore
+        dispatch(getDocumentsPaginationAction(token));
     }
 
     return (
