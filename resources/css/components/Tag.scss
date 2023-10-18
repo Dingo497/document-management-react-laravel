@@ -2,7 +2,7 @@
 @import '../mixins';
 
 .tag {
-    @include btn($background: $success, $opacity: 1);
+    @include btn($background: $success-color, $opacity: 1);
     max-width: 90px;
     text-align: center;
 }
