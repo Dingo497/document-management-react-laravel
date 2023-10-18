@@ -1,17 +1,17 @@
 import './bootstrap';
 import '../css/app.scss'
 
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
+import EditDocument from "./pages/EditDocument";
 import Register from './pages/Register';
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import CreateDocument from "./pages/CreateDocument";
 import AuthRoute from "./router/AuthRoute";
-
-import ReactDOM from 'react-dom/client';
-import {Provider} from "react-redux";
-import {BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import store from "./redux/store";
-import EditDocument from "./pages/EditDocument";
 
 
 ReactDOM.createRoot(document.getElementById('app')).render(

@@ -1,7 +1,8 @@
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { AppStateTypes } from "../types/globalTypes";
 import DocumentForm from "../components/DocumentForm";
-import {useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {AppStateTypes} from "../types/globalTypes";
+
 
 export default function EditDocument() {
     const { documentID } = useParams();
@@ -9,7 +10,6 @@ export default function EditDocument() {
         // @ts-ignore - Lebo nepozna find kvoli kniznici
         state.document.documents.find(doc => doc.id === parseInt(documentID, 10))
     );
-
 
     return (
         <>

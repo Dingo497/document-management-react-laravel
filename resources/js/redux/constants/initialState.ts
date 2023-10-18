@@ -1,6 +1,6 @@
-import {InitialStateAuthType} from "../../types/authTypes";
-import {TagsType} from '../../types/globalTypes';
-import {DocumentsType} from '../../types/documentTypes';
+import { InitialStateAuthType } from "../../types/authTypes";
+import { TagsType } from '../../types/globalTypes';
+import { DocumentsType } from '../../types/documentTypes';
 
 export const AuthInitialState: InitialStateAuthType = {
     user: null,

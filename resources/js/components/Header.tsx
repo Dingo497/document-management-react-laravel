@@ -1,6 +1,7 @@
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateTypes} from "../types/globalTypes";
-import {logoutAction} from "../redux/actions/authActions";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutAction } from "../redux/actions/authActions";
+import { AppStateTypes } from "../types/globalTypes";
+
 
 export default function Header() {
     const dispatch = useDispatch();

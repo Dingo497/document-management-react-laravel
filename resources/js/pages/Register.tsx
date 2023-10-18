@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerAction } from "../redux/actions/authActions";
-import {Link, useNavigate} from "react-router-dom";
+
 import { AuthRegisterFormType } from "../types/authTypes";
+import { alertDataType } from '../types/globalTypes';
 import Alert from "../components/Alert";
-import {alertDataType} from '../types/globalTypes';
 
 export default function Register() {
     const dispatch = useDispatch();

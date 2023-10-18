@@ -1,5 +1,5 @@
+import { TagType } from "../types/globalTypes";
 import ActionButton from "./ActionButton";
-import {TagType} from "../types/globalTypes";
 import Tag from "./Tag";
 
 export default function TableRow(props: {documentID: string, name: string, tags: TagType[]}) {

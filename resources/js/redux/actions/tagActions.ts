@@ -1,6 +1,6 @@
+import { getUserTags } from "../../http/tagApi";
 import { ActionTypes } from "../constants/actionTypes";
-import {getUserTags} from "../../http/tagApi";
-import {ApiTokenType} from "../../types/authTypes";
+import { ApiTokenType } from "../../types/authTypes";
 export const getUserTagsAction = (token: ApiTokenType) => {
     return async (dispatch) => {
         try {

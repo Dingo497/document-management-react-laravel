@@ -1,7 +1,8 @@
-import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateTypes} from "../types/globalTypes";
-import {getDocumentsPaginationAction, getUserDocumentsAction} from "../redux/actions/documentActions";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getDocumentsPaginationAction, getUserDocumentsAction } from "../redux/actions/documentActions";
+import { AppStateTypes } from "../types/globalTypes";
+
 
 export default function PaginationDocuments() {
     const dispatch = useDispatch();

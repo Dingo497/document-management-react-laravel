@@ -1,8 +1,9 @@
-import { ActionTypes } from "../constants/actionTypes";
 import { login, logout, register } from "../../http/authApi";
+import { ActionTypes } from "../constants/actionTypes";
 import { ApiTokenType, AuthLoginFormType, AuthRegisterFormType, setUserActionType } from "../../types/authTypes";
-import {logoutDocumentsAction} from './documentActions';
-import {logoutTagsAction} from './tagActions';
+
+import { logoutDocumentsAction } from './documentActions';
+import { logoutTagsAction } from './tagActions';
 
 export const registerAction = (userData: AuthRegisterFormType) => {
     return async (dispatch) => {

@@ -1,10 +1,11 @@
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {getUserDocumentsAction} from "../redux/actions/documentActions";
-import {getUserTagsAction} from "../redux/actions/tagActions";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserDocumentsAction } from "../redux/actions/documentActions";
+import { getUserTagsAction } from "../redux/actions/tagActions";
+
 import { AppStateTypes } from "../types/globalTypes";
-import {DocumentType} from '../types/documentTypes';
+import { DocumentType } from '../types/documentTypes';
 
 import Header from "../components/Header";
 import Table from "../components/Table";

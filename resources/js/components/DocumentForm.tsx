@@ -1,11 +1,10 @@
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateTypes} from "../types/globalTypes";
-import {DocumentType} from '../types/documentTypes';
-import {alertDataType} from '../types/globalTypes';
-import {createUserDocumentAction, editUserDocumentAction} from "../redux/actions/documentActions";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {documentFormDataType} from "../types/documentTypes";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { createUserDocumentAction, editUserDocumentAction } from "../redux/actions/documentActions";
+
+import { AppStateTypes, alertDataType } from "../types/globalTypes";
+import { DocumentType, documentFormDataType } from '../types/documentTypes';
 
 import Alert from "./Alert";
 import TagList from "./TagList";

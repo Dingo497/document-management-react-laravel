@@ -1,4 +1,5 @@
-import {TagType} from "../types/globalTypes";
+import { TagType } from "../types/globalTypes";
+
 
 export default function TagList(props: {tags: TagType[], checkedTags: number[]|null, onChangeCheckbox}) {
     const {tags, checkedTags, onChangeCheckbox} = props;

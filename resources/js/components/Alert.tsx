@@ -1,5 +1,6 @@
-import {AiOutlineClose} from "react-icons/ai";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+
 
 export default function Alert({type, title, messages}) {
     const alert = document.getElementById('alert');

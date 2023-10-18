@@ -1,5 +1,6 @@
-import {DocumentType} from "../types/documentTypes";
+import { DocumentType } from "../types/documentTypes";
 import TableRow from "./TableRow";
+
 
 export default function Table(props: {documents: DocumentType[]}) {
     const {documents} = props;

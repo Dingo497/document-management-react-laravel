@@ -3,9 +3,9 @@ import {backendAPI} from "./index";
 import {ApiStatusResponseType, ApiTokenType} from "../types/authTypes";
 import {
     ApiCreateDocumentSuccessResponseType, ApiDocumentPaginationSuccessResponseType,
-    ApiDocumentSuccessResponseType, ApiDocumentWithUserSuccessResponseType, ApiEditDocumentSuccessResponseType
+    ApiDocumentSuccessResponseType, ApiDocumentWithUserSuccessResponseType, ApiEditDocumentSuccessResponseType,
+    EditDocumentType, NewDocumentType
 } from "../types/documentTypes";
-import {EditDocumentType, NewDocumentType} from "../types/documentTypes";
 
 export const getUserDocuments =  (token: ApiTokenType, page: number): Promise<AxiosResponse<ApiDocumentSuccessResponseType>> => backendAPI.get('documents?page=' + page, {
     headers: {

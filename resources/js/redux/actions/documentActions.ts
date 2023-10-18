@@ -1,5 +1,4 @@
 import { ActionTypes } from "../constants/actionTypes";
-import {ApiTokenType} from "../../types/authTypes";
 import {
     createUserDocument,
     editUserDocument,
@@ -7,7 +6,8 @@ import {
     getUserDocuments, getUserDocumentsAfterRefresh,
     removeUserDocument
 } from "../../http/documentApi";
-import {DocumentType, EditDocumentType, NewDocumentType} from "../../types/documentTypes";
+import { ApiTokenType } from "../../types/authTypes";
+import { DocumentType, EditDocumentType, NewDocumentType } from "../../types/documentTypes";
 import { setUserAction } from './authActions';
 
 export const getUserDocumentsAction = (token: ApiTokenType, page: number = 1) => {
