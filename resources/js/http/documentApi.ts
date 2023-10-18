@@ -49,6 +49,7 @@ export const removeUserDocument =  (token: ApiToken, documentID: number): Promis
 export const downloadUserDocument = (token: ApiToken, documentFileUrl: string): Promise<AxiosResponse> => backendAPI.get('documents/download/' + documentFileUrl,{
     headers: {
         Authorization: `Bearer ${token}`,
-        responseType: 'blob',
+        'Accept': 'application/pdf'
     },
+    responseType: 'blob',
 });

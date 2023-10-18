@@ -40,15 +40,14 @@ export default function ActionButton({documentID, type}: ButtonProps) {
         if (currentDocument.image) {
             downloadUserDocument({token: token}, currentDocument.image)
                 .then((response) => {
-                    if (response.data) {
-                        const blob = new Blob([response.data], { type: 'application/pdf' }); // Príklad pre PDF súbory
-                        const url = window.URL.createObjectURL(blob);
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', currentDocument.image);
-                        document.body.appendChild(link);
-                        link.click();
-                    }
+                    console.log(response);
+                    const fileURL =
+                        window.URL.createObjectURL(response.data);
+
+                    let alink = document.createElement("a");
+                    alink.href = fileURL;
+                    alink.download = "something.pdf";
+                    alink.click();
                 });
         }
     }

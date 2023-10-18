@@ -26,6 +26,7 @@ class AuthController extends Controller
         return $this->login($request);
     }
 
+
     /**
      * @param AuthRequest $request
      * @return jsonResponse
@@ -43,6 +44,8 @@ class AuthController extends Controller
         $user = Auth::user();
         $token = $user->createToken('main')->plainTextToken;
 
+        // Cookie s tokenom. Potrebny pre refresh webu react aplikacie
+        // Mohol som cely Auth spravit tymto stylom...
         $cookie = cookie(
             'auth_token',
             $token,
@@ -62,6 +65,7 @@ class AuthController extends Controller
         ])->cookie($cookie);
     }
 
+
     /**
      * @return JsonResponse
      */
@@ -74,6 +78,7 @@ class AuthController extends Controller
             ],
         ]);
     }
+
 
     /**
      * @return JsonResponse

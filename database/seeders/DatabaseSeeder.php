@@ -17,12 +17,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void {
         User::factory()->count(1)->create();
 
-        for ($i = 0; $i < 3; $i++) {
+        $tags = [];
+        for ($j = 0; $j < 6; $j++) {
+            $tag = Tag::factory()->create();
+            $tags[] = $tag;
+        }
+        for ($i = 0; $i < 24; $i++) {
             $document = Document::factory()->create();
-            for ($j = 0; $j < 2; $j++) {
-                $tag = Tag::factory()->create();
-                $document->tags()->attach($tag);
-            }
+            $document->tags()->attach($tags[0]);
+            $document->tags()->attach($tags[1]);
         }
     }
 }

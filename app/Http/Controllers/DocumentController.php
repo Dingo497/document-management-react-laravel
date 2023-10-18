@@ -6,9 +6,9 @@ use App\Http\Resources\DocumentResource;
 use App\Models\Document;
 use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,6 +31,7 @@ class DocumentController extends Controller {
             ],
         ]);
     }
+
 
     /**
      * Sluzi na ziskanie dokumentov pre usera bez potreby byt prihlaseny ale potrebne je mat token v cookies.
@@ -58,6 +59,7 @@ class DocumentController extends Controller {
         return response()->json(['error' => 'Unauthenticated'], 401);
     }
 
+
     public function index(Request $request): jsonResponse {
         $page = $request->input('page', 1);
         $skip = ($page - 1) * $this->perPage;
@@ -76,6 +78,7 @@ class DocumentController extends Controller {
             ],
         ]);
     }
+
 
     public function store(StoreDocumentRequest $request): jsonResponse {
         $document = $request->validated();
@@ -101,6 +104,7 @@ class DocumentController extends Controller {
         ]);
     }
 
+
     public function show(Document $document): jsonResponse {
         return response()->json([
             'status' => 'success',
@@ -109,6 +113,7 @@ class DocumentController extends Controller {
             ],
         ]);
     }
+
 
     public function update(UpdateDocumentRequest $request, Document $document): jsonResponse {
         $editedDocument = $request->validated();
@@ -139,6 +144,7 @@ class DocumentController extends Controller {
         ]);
     }
 
+
     public function destroy(Document $document): jsonResponse {
         $document->delete();
         return response()->json([
@@ -146,16 +152,23 @@ class DocumentController extends Controller {
         ]);
     }
 
+    /**
+     * Stiahne pdf dokument
+     * @param $filename - Nazov suboru
+     */
     public function download($filename) {
-        $path = storage_path("app/documents/{$filename}");
+        $subpath = 'documents/' . $filename;
 
-        if (!Storage::exists($path)) {
-            abort(404);
+        if (!Storage::exists($subpath)) {
+            return response()->json([
+                'status' => 'error',
+            ], 404);
         }
 
-        return response()->download($path, $filename, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="' . $filename . '"',
+        $type = Storage::mimeType($subpath);
+
+        return response()->download(storage_path('app/' . $subpath), $filename, [
+            'Content-Type' => $type,
         ]);
     }
 }

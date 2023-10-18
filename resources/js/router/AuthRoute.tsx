@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
-import { AppStateTypes } from "../redux/constants/appStateTypes";
+import { AppStateTypes } from "../types/globalTypes";
 import { Navigate, useNavigate} from 'react-router-dom';
 import {useLayoutEffect, useState} from "react";
 import {getUserDocumentsAfterRefreshAction} from "../redux/actions/documentActions";

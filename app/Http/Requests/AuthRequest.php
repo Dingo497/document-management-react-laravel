@@ -30,8 +30,8 @@ class AuthRequest extends FormRequest
                 'password' => [
                     'required',
                     'confirmed',
-                    // Password::min(8)->mixedCase()->numbers()->symbols() // neskor odkomentovat
-                    Password::min(4)
+                    // Pri vytvarani hesla som mohol este pridat nejaky suffix pre vacsiu bezpecnost
+                     Password::min(8)->mixedCase()->numbers()->symbols()
                 ]
             ];
         } elseif ($this->is('api/login')) {

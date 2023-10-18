@@ -17,7 +17,7 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Tag',
+            'name' => 'Tag - ' . rand(1, 50),
             'user_id' => 1
         ];
     }

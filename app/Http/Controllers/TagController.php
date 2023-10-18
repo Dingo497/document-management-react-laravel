@@ -16,6 +16,7 @@ class TagController extends Controller {
         ]);
     }
 
+
     public function store(StoreTagRequest $request) : jsonResponse {
         $tag = $request->validated();
         Tag::create($tag);
@@ -28,6 +29,7 @@ class TagController extends Controller {
         ]);
     }
 
+
     public function show(Tag $tag): JsonResponse {
         return response()->json([
             'status' => 'success',
@@ -36,6 +38,7 @@ class TagController extends Controller {
             ],
         ]);
     }
+
 
     public function destroy(Tag $tag): JsonResponse {
         $tag->delete();

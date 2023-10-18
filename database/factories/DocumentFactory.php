@@ -17,9 +17,10 @@ class DocumentFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Dokument - ' . fake()->name(),
+            'name' => 'Dokument - ' . rand(1, 50),
             'user_id' => 1,
-            'image' => null,
+            // Nieje asi v gite treba ho teda manualne vlozit don...
+            'image' => 'documents/Zivotopis-Jul2023.pdf',
         ];
     }
 }

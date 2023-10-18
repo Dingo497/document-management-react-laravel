@@ -25,8 +25,12 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/user', [AuthController::class, 'getUser']);
 
     Route::get('documents/documents-pagination', [DocumentController::class, 'getTotalUserDocumentsCount']);
-    Route::get('documents/download/{filename}', [DocumentController::class, 'download']);
     Route::apiResource('documents', DocumentController::class);
+    // Stahovanie mi nefunguje neviem z akeho dovodu. Asi kvoli middleware Auth.
+    // Ked danu route dam mimo auth a pojdem na danu adresu cez prehliadac tak mi to pekne stiahne
+    // Avsak v postmane mi to funguje aj ked je to sem... Mozno aj v reacte to taham zle.
+    // Ale v response.data mam text/html a to asi nieje blob data neviem...
+    Route::get('documents/download/{filename}', [DocumentController::class, 'download']);
 
     Route::apiResource('tags', TagController::class);
 });
