@@ -58,6 +58,7 @@ export default function Dashboard() {
         }
     }
 
+    // Bolo by dobre cele filtrovanie dokumentov vlozit do samostatneho komponentu
     // @ts-ignore
     const filterDocuments = async (value: string, type: 'add'|'remove') => {
         const localStorageSelectedTags = JSON.parse(localStorage.getItem('selectedTags'));

@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppStateTypes } from "../types/globalTypes";
 import { getUserDocumentsAfterRefreshAction } from "../redux/actions/documentActions";
 
-
+/**
+ * Je to taky middleware, ktory ak dam refresh stranky tak sa dolezite udaje obnovia do stavu aplikacie
+ * @param children
+ */
 export default function AuthRoute({ children }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();

@@ -7,6 +7,7 @@ import { AuthRegisterFormType } from "../types/authTypes";
 import { alertDataType } from '../types/globalTypes';
 import Alert from "../components/Alert";
 
+
 export default function Register() {
     const dispatch = useDispatch();
     const navigate = useNavigate();

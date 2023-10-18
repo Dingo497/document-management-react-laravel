@@ -6,6 +6,10 @@ import { getDocumentsPaginationAction, removeUserDocumentAction } from "../redux
 import { ButtonPropsType, AppStateTypes } from "../types/globalTypes";
 import { downloadUserDocument } from "../http/documentApi";
 
+/**
+ * @param documentID - potrebne na edit a delete funkcionalitu
+ * @param type - typ akcie
+ */
 export default function ActionButton({documentID, type}: ButtonPropsType) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -16,6 +20,7 @@ export default function ActionButton({documentID, type}: ButtonPropsType) {
         state.document.documents.find(doc => doc.id === parseInt(documentID, 10))
     );
 
+    // Zobrazenie ikony
     const icon = () => {
         if (type === 'edit') {
             return <AiOutlineEdit />;

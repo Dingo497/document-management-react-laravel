@@ -10,6 +10,10 @@ import Alert from "./Alert";
 import TagList from "./TagList";
 
 
+/**
+ * Komponent formularu vytvarania/upravy dokumentu
+ * @param props - editDocument: Ci ide o upravu dokuemntu alebo tvorba noveho
+ */
 export default function DocumentForm(props: {editDocument ?:DocumentType|null}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -23,6 +27,7 @@ export default function DocumentForm(props: {editDocument ?:DocumentType|null}) 
         tags: [],
         image: null
     });
+    // Stringove zobrazenie vybratych tagov
     const [stringTags, setStringTags] = useState<string[]>([]);
     const [alert, setAlert] = useState<alertDataType>({
         type: 'danger',
@@ -30,6 +35,7 @@ export default function DocumentForm(props: {editDocument ?:DocumentType|null}) 
         messages: []
     });
 
+    // Ak upravujem dokument tak mu nastavim jeho hodnoty
     useEffect(() => {
         if (editDocument) {
             setFormData({

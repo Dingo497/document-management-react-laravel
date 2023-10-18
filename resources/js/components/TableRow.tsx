@@ -2,6 +2,7 @@ import { TagType } from "../types/globalTypes";
 import ActionButton from "./ActionButton";
 import Tag from "./Tag";
 
+
 export default function TableRow(props: {documentID: string, name: string, tags: TagType[]}) {
     const {documentID, name, tags} = props;
 

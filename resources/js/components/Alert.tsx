@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import {alertDataType} from "../types/globalTypes";
 
 
-export default function Alert({type, title, messages}) {
+/**
+ * @param type
+ * @param title
+ * @param messages - Konkretne hlasky pre Alert. Avsak je to zatial prisposobene len nato, co mi pride z backendu
+ */
+export default function Alert({type, title, messages}: alertDataType) {
     const alert = document.getElementById('alert');
     const [arrayMessages, setArrayMessages] = useState([]);
 
+    // Sluzi na zobrazenie chybovych hlasok z backendu
     useEffect(() => {
         if (type && title && messages) {
             alert.classList.remove('hide');
